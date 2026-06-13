@@ -401,6 +401,15 @@ function page(s) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Section ${s.num} :: ${esc(s.title)} :: MØNTAN1 Academy</title>
+<meta name="description" content="${esc(s.intro)}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Section ${s.num} :: ${esc(s.title)} :: MØNTAN1 Academy">
+<meta property="og:description" content="${esc(s.intro)}">
+<meta property="og:image" content="https://m0ntan1.github.io/m0ntan1-academy/assets/social-card.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://m0ntan1.github.io/m0ntan1-academy/assets/social-card.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">

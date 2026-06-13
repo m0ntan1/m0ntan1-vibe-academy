@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f2efe8;
+    --ink: #0a0a0a;
+    --dim: #6e6a60;
+    --hair: #d4d0c5;
+    --red: #e00000;
+    --teal: #4B737A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .card { width: 1280px; height: 640px; position: relative; overflow: hidden; }
+
+  /* faint glyph grain */
+  .grain {
+    position: absolute; inset: 0; z-index: 0;
+    font: 400 13px/2.1 'IBM Plex Mono', monospace;
+    letter-spacing: .22em; color: #e4dfd1; white-space: pre; pointer-events: none;
+  }
+
+  /* the learning-curve ridgeline, in a clean band below the text */
+  .ridge { position: absolute; left: 28px; right: 28px; bottom: 58px; height: 152px; z-index: 1; }
+  .ridge svg { width: 100%; height: 100%; }
+  .ridge .far { fill: none; stroke: var(--hair); stroke-width: 2; }
+  .ridge .mid { fill: none; stroke: var(--dim); stroke-width: 2; }
+  .ridge .crest { fill: none; stroke: var(--red); stroke-width: 3; }
+  .ridge .sil { fill: none; stroke: var(--ink); stroke-width: 2.5; }
+
+  .frame { position: absolute; inset: 28px; border: 3px solid var(--ink); z-index: 3; pointer-events: none; }
+
+  .content { position: absolute; inset: 28px; z-index: 4; padding: 40px 48px; display: flex; flex-direction: column; }
+
+  .top { display: flex; justify-content: space-between; align-items: baseline; }
+  .mark { font-size: 24px; font-weight: 700; letter-spacing: .2em; }
+  .mark .o { color: var(--red); }
+  .mark small { font-weight: 400; font-size: 13px; letter-spacing: .26em; color: var(--dim); margin-left: 12px; }
+  .badge { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--dim); }
+  .badge b { color: var(--red); font-weight: 400; }
+
+  .eyebrow { margin-top: 40px; font-size: 14px; letter-spacing: .3em; text-transform: uppercase; color: var(--teal); }
+
+  h1 {
+    margin-top: 14px;
+    font-size: 116px; font-weight: 700; line-height: .92;
+    letter-spacing: -.02em; text-transform: uppercase;
+  }
+  h1 .o { color: var(--red); }
+  h1 .indent { padding-left: .7em; }
+
+  .sub { margin-top: 26px; font-size: 19px; line-height: 1.5; color: var(--dim); max-width: 720px; }
+  .code { margin-top: 16px; font-size: 16px; color: var(--teal); }
+  .code .c { color: var(--dim); }
+
+  /* bottom marquee strip, flush to inner frame */
+  .strip {
+    position: absolute; left: 28px; right: 28px; bottom: 28px; z-index: 5;
+    background: var(--ink); color: var(--paper);
+    padding: 13px 0; text-align: center;
+    font-size: 14px; letter-spacing: .42em; text-transform: uppercase; font-weight: 600;
+    white-space: nowrap; overflow: hidden;
+  }
+  .strip .red { color: var(--red); }
+</style>
+</head>
+<body>
+<div class="card">
+  <pre class="grain" id="grain"></pre>
+
+  <div class="ridge">
+    <svg viewBox="0 0 1224 152" preserveAspectRatio="none" aria-hidden="true">
+      <path class="far" d="M0,70 C150,50 250,44 380,60 C520,78 600,96 740,72 C880,50 960,30 1100,40 C1170,46 1210,58 1224,54"/>
+      <path class="mid" d="M0,96 C150,78 260,98 380,72 C500,48 620,92 740,84 C860,76 950,108 1080,92 C1150,84 1200,98 1224,92"/>
+      <path class="sil" d="M0,124 C130,100 230,116 360,96 C500,74 590,128 720,112 C850,96 930,128 1060,108 C1150,94 1200,118 1224,108"/>
+      <path class="crest" d="M0,124 C130,100 230,116 360,96 C500,74 590,128 720,112 C850,96 930,128 1060,108 C1150,94 1200,118 1224,108"/>
+    </svg>
+  </div>
+
+  <div class="frame"></div>
+
+  <div class="content">
+    <div class="top">
+      <div class="mark">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></div>
+      <div class="badge"><b>//</b> Free forever &middot; $0 &middot; West Virginia</div>
+    </div>
+
+    <div class="eyebrow">A builder's primer &middot; zero to one</div>
+    <h1>Off zer<span class="o">ø</span>,<br><span class="indent">in a weekend.</span></h1>
+    <div class="sub">Never written a line to shipping real products on the open internet, with an AI co-pilot the whole way.</div>
+    <div class="code">builder(zero);<span class="c"> // =&gt; zero to one, in a weekend</span></div>
+  </div>
+
+  <div class="strip">
+    Educate <span class="red">/</span> Disintermediate <span class="red">/</span> Innovate <span class="red">/</span> Build
+  </div>
+</div>
+
+<script>
+  // faint glyph grain, deterministic, same dialect as the site
+  (function () {
+    let s = 91;
+    const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
+    const G = '·.:;~-=+';
+    let out = '';
+    for (let r = 0; r < 26; r++) {
+      let row = '';
+      for (let x = 0; x < 150; x++) row += rnd() < 0.05 ? G[Math.floor(rnd() * G.length)] : ' ';
+      out += row + '\n';
+    }
+    document.getElementById('grain').textContent = out;
+    document.documentElement.dataset.ready = '1';
+  })();
+</script>
+</body>
+</html>
