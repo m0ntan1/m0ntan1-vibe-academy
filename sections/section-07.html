@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 07 :: Connecting to APIs :: MØNTAN1 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/academy.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="../index.html">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></a>
+    <nav>
+      <a href="../index.html">Curriculum</a>
+      <a href="../setup.html">Setup</a>
+    </nav>
+    <a class="cta" href="https://m0ntan1.com">MØNTAN1</a>
+  </header>
+
+  <section class="lesson-head">
+    <div class="eyebrow">[ SECTION 07 :: PART II :: BUILD THINGS ]</div>
+    <h1>Connecting to APIs<span class="red">.</span></h1>
+    <p class="intro">APIs are how your page talks to the rest of the world. Fetch live data, read JSON, and keep your keys out of public view.</p>
+    <div class="lesson-meta">
+      <span><b>Time</b> ~60 min</span>
+      <span><b>Tools</b> VS Code, Claude, Replit</span>
+      <span><b>Cost</b> $0</span>
+    </div>
+  </section>
+
+  <div class="tool-rail reveal">
+    <span class="tr-label">Tools</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.4 2.1 9.9 9.3 5.3 5.8l-1.7.8 3.9 5.4-3.9 5.4 1.7.8 4.6-3.5 7.5 7.2 3-1.5V3.6l-3-1.5zm.1 4.6v10.6l-5.6-5.3 5.6-5.3z"/></svg></span>VS Code</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5 13.9 8l4.7-4.8 1.3 1.3L15.1 9.3l6.4-.9.3 1.8-6.4.9 5.8 2.9-.9 1.7-5.8-2.9 3.4 5.5-1.6 1-3.4-5.5-.6 6.5-1.8-.2.6-6.5-4.7 4.5-1.3-1.3 4.7-4.5-6.4 1.3-.4-1.8 6.4-1.3-5.9-2.7.8-1.7 5.9 2.7L8 3l1.7-.8 2.3 6V1.5z"/></svg></span>Claude</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7z"/></svg></span>Replit</span>
+  </div>
+
+  <div class="objectives reveal">
+    <h3>You will learn</h3>
+    <ul>
+      <li>Explain what an API is without hand-waving</li>
+      <li>Fetch live data with JavaScript</li>
+      <li>Read and navigate JSON responses</li>
+      <li>Handle API keys without leaking them</li>
+    </ul>
+  </div>
+
+  <div class="exchange reveal">
+      <div class="ex-side ex-you"><span class="ex-tag">Your page</span><code>fetch('weather?city=Morgantown')</code></div>
+      <div class="ex-mid"><span class="ex-arrow">request &rarr;</span><span class="ex-arrow back">&larr; response</span></div>
+      <div class="ex-side ex-api"><span class="ex-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 7 3 12l5 5M16 7l5 5-5 5M13 5l-2 14"/></svg> The API</span><code>{ "tempF": 72, "sky": "clear" }</code></div>
+    </div>
+
+  <!-- Lesson body ported at build time from weeks/week7.html -->
+<div class="lesson-section" id="l1">
+  <div class="section-number">Lesson 1 of 4</div>
+  <h2>What an API Is</h2>
+  <p>API stands for Application Programming Interface. Forget the acronym. Here's the mental model: an API is a waiter at a restaurant. You (your code) tell the waiter (the API) what you want. The waiter goes to the kitchen (another service's server), gets what you asked for, and brings it back.</p>
+  <div class="diagram">
+    <div class="diagram-title"> The restaurant analogy :: how APIs work</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(124,58,237,0.12);border-color:rgba(124,58,237,0.3)"></div><div class="flow-label">Your App</div><div class="flow-sub">"Get me weather for NYC"</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(6,182,212,0.12);border-color:rgba(6,182,212,0.3)"></div><div class="flow-label">API Request</div><div class="flow-sub">Formatted ask</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.3)"></div><div class="flow-label">Weather Server</div><div class="flow-sub">Looks up data</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3)"></div><div class="flow-label">JSON Response</div><div class="flow-sub">Data comes back</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(244,63,94,0.12);border-color:rgba(244,63,94,0.3)"></div><div class="flow-label">You Show It</div><div class="flow-sub">On your page</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l2">
+  <div class="section-number">Lesson 2 of 4</div>
+  <h2>Fetching Data with JavaScript</h2>
+  <p>JavaScript has a built-in command called <code>fetch()</code> that talks to APIs. You give it a URL, it returns data. The data comes back in a format called JSON.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">weather.js</span></div>
+    <pre><span class="cm">// fetch() goes and gets data from a URL</span>
+<span class="kw">fetch</span>(<span class="st">'https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_KEY'</span>)
+  .<span class="at">then</span>(<span class="kw">response</span> => <span class="kw">response</span>.<span class="at">json</span>())   <span class="cm">// convert to JSON</span>
+  .<span class="at">then</span>(<span class="kw">data</span> => {
+    <span class="cm">// data is now a JavaScript object you can use</span>
+    <span class="tc">console</span>.<span class="at">log</span>(<span class="kw">data</span>.<span class="at">main</span>.<span class="at">temp</span>);       <span class="cm">// temperature</span>
+    <span class="tc">document</span>.<span class="at">getElementById</span>(<span class="st">'temp'</span>).<span class="at">textContent</span> = <span class="kw">data</span>.<span class="at">main</span>.<span class="at">temp</span> + <span class="st">'°'</span>;
+  });</pre>
+  </div>
+  <div class="callout callout-tool">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Get a free OpenWeather API key</div>
+    <p>Go to <a href="https://openweathermap.org/api" target="_blank" style="color:var(--gold-light)">openweathermap.org/api</a> → sign up free → copy your API key. Paste it into Claude and say "Write me the fetch code for current weather in [city] using this key."</p></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l3">
+  <div class="section-number">Lesson 3 of 4</div>
+  <h2>Reading JSON Data</h2>
+  <p>JSON (JavaScript Object Notation) is how APIs send data back to you. It looks like a labeled list. Once you can read it, you can pull out any piece of data you want.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">example-weather-response.json</span></div>
+    <pre>{
+  <span class="at">"name"</span>: <span class="st">"London"</span>,
+  <span class="at">"main"</span>: {
+    <span class="at">"temp"</span>: <span class="vl">18.5</span>,           <span class="cm">// ← data.main.temp</span>
+    <span class="at">"humidity"</span>: <span class="vl">72</span>          <span class="cm">// ← data.main.humidity</span>
+  },
+  <span class="at">"weather"</span>: [{
+    <span class="at">"description"</span>: <span class="st">"light rain"</span>  <span class="cm">// ← data.weather[0].description</span>
+  }]
+}</pre>
+  </div>
+  <div class="prompt-box">
+    <p>I'm calling the OpenWeather API and getting this JSON back: [paste the response].
+I want to display: city name, temperature in Fahrenheit, weather description, and humidity.
+Write the JavaScript to extract each value and display it in these HTML elements I already have: [paste your HTML].</p>
+  </div>
+</div>
+
+<div class="lesson-section" id="l4">
+  <div class="section-number">Lesson 4 of 4</div>
+  <h2>API Keys &amp; Keeping Them Safe</h2>
+  <p>API keys are like passwords :: they identify your account and control access. For this section's project, you'll use them directly in your JavaScript (fine for learning). Later we'll cover safer approaches.</p>
+  <div class="callout callout-warn">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Don't post API keys on GitHub</div>
+    <p>If you push code to a public GitHub repo with an API key in it, bots will find it within minutes and use it. For now, keep your projects private on GitHub, or use keys with usage limits. We'll cover proper secret management in Section 8.</p></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="project">
+  <div class="section-number"> Section 7 Project</div>
+  <h2>Live Weather Dashboard</h2>
+  <div class="exercise">
+    <div class="exercise-label">Build This</div>
+    <h3>A weather dashboard that shows live data for any city</h3>
+    <ul>
+      <li>A <strong>text input</strong> where you type a city name</li>
+      <li>A <strong>search button</strong> that fetches the weather</li>
+      <li>Display: <strong>temperature, city name, description, humidity, wind speed</strong></li>
+      <li>A weather <strong>emoji icon</strong> that changes based on conditions</li>
+      <li>Error handling for city not found</li>
+    </ul>
+  </div>
+  <div class="prompt-box">
+    <p>Build a weather dashboard page (HTML + CSS + JS).
+User types a city name, clicks Search, and sees current weather.
+Use the OpenWeather API with this key: [YOUR KEY]
+Show: city name, temperature in both °C and °F, weather description, humidity, and wind speed.
+Add an appropriate emoji for the weather condition.
+Handle the error case where the city isn't found.
+Make it look clean and modern. I'm a beginner :: add comments.</p>
+  </div>
+</div>
+
+
+  <div class="finish">
+    <button class="btn red" data-complete="section-07">Mark section complete</button>
+    <div class="pager">
+        <a class="btn ghost" href="section-06.html">&larr; Section 06</a>
+        <a class="btn ghost" href="section-08.html">Section 08 &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 MØNTAN1 Academy :: Free forever</span>
+    <span>Drawn: B0SEPHUS G. ALTAMONT :: Checked: MERCER LANG</span>
+    <a href="https://m0ntan1.com">m0ntan1.com</a>
+  </footer>
+</div>
+
+<script src="../assets/academy.js"></script>
+</body>
+</html>

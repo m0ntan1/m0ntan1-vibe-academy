@@ -1,535 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Setup Day — Montani AI Vibe Academy</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabinet+Grotesk:wght@300;400;500;700;800&family=Fira+Code:wght@400;500&display=swap');
-
-:root {
-  --bg: #060810;
-  --surface: #0d1017;
-  --surface2: #131720;
-  --border: #1e2535;
-  --gold: #c9a84c;
-  --gold-light: #e8c97a;
-  --gold-dim: #7a5e22;
-  --blue: #2563a8;
-  --blue-light: #5b9bd5;
-  --blue-dim: #1a3d6b;
-  --steel: #3a7ca5;
-  --steel-light: #7fb3d3;
-  --green: #2d9e6b;
-  --green-light: #4dbb8a;
-  --red: #c0392b;
-  --text: #e8ecf4;
-  --muted: #5a6680;
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Cabinet Grotesk', sans-serif;
-  font-weight: 400;
-  line-height: 1.7;
-  min-height: 100vh;
-}
-
-body::before {
-  content:'';
-  position:fixed; inset:0; pointer-events:none; z-index:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 5% 0%, rgba(201,168,76,0.07) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 40% at 95% 90%, rgba(37,99,168,0.08) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(58,124,165,0.03) 0%, transparent 60%);
-}
-
-/* ── SIDEBAR ── */
-.sidebar {
-  position:fixed; left:0; top:0; bottom:0; width:268px;
-  background: var(--surface);
-  border-right: 1px solid var(--border);
-  padding: 26px 16px;
-  overflow-y: auto; z-index:20;
-  display:flex; flex-direction:column;
-}
-
-.sidebar-logo {
-  display:flex; align-items:center; gap:10px;
-  margin-bottom: 4px;
-}
-.sidebar-logo-mark {
-  width:34px; height:34px; border-radius:8px; flex-shrink:0;
-  background: linear-gradient(135deg, var(--gold), var(--blue));
-  display:grid; place-items:center;
-  font-family:'Bebas Neue',sans-serif; font-size:16px; color:#fff; letter-spacing:0.05em;
-}
-.sidebar-org {
-  font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.08em;
-  color: var(--text); line-height:1.1;
-}
-.sidebar-sub {
-  font-size:9px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase;
-  color: var(--gold); margin-top:1px;
-}
-.sidebar-tagline {
-  font-size:10px; color:var(--muted); margin-bottom:22px; padding-left:44px;
-}
-
-.nav-section-label {
-  font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
-  color:var(--muted); padding:0 8px; margin:14px 0 5px;
-}
-
-.nav-item {
-  display:flex; align-items:center; gap:10px;
-  padding:8px 10px; border-radius:8px; margin-bottom:2px;
-  text-decoration:none; color:var(--muted); font-size:0.82rem;
-  font-weight:500; border:1px solid transparent; transition:all 0.18s;
-}
-.nav-item:hover { background:var(--surface2); color:var(--text); }
-.nav-item.active {
-  background: rgba(201,168,76,0.10);
-  border-color: rgba(201,168,76,0.25);
-  color: var(--gold-light);
-}
-.nav-item.active.p2 {
-  background: rgba(37,99,168,0.12);
-  border-color: rgba(37,99,168,0.28);
-  color: var(--blue-light);
-}
-.nav-item.active.p3 {
-  background: rgba(58,124,165,0.10);
-  border-color: rgba(58,124,165,0.25);
-  color: var(--steel-light);
-}
-.nav-item.done { color: var(--green-light); }
-.nav-item.done::after { content:'✓'; margin-left:auto; font-size:11px; }
-.nav-icon { font-size:13px; width:18px; text-align:center; flex-shrink:0; }
-.nav-divider { height:1px; background:var(--border); margin:10px 0; }
-
-.sidebar-progress { margin-top:auto; padding-top:18px; border-top:1px solid var(--border); }
-.sp-label { display:flex; justify-content:space-between; font-size:10px; color:var(--muted); margin-bottom:6px; }
-.sp-bar { height:3px; background:rgba(255,255,255,0.05); border-radius:100px; overflow:hidden; }
-.sp-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--gold),var(--blue-light)); transition:width 0.5s; }
-
-/* ── MAIN ── */
-.main { margin-left:268px; padding:52px 56px 120px; max-width:920px; position:relative; z-index:1; }
-
-/* ── LESSON HEADER ── */
-.lesson-header { margin-bottom:52px; }
-.week-badge {
-  display:inline-flex; align-items:center; gap:8px;
-  border-radius:6px; padding:5px 14px; margin-bottom:16px;
-  font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;
-}
-.week-badge.p1 { background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.25); color:var(--gold-light); }
-.week-badge.p2 { background:rgba(37,99,168,0.1); border:1px solid rgba(37,99,168,0.3); color:var(--blue-light); }
-.week-badge.p3 { background:rgba(58,124,165,0.1); border:1px solid rgba(58,124,165,0.28); color:var(--steel-light); }
-.week-badge.setup { background:rgba(45,158,107,0.1); border:1px solid rgba(45,158,107,0.25); color:var(--green-light); }
-
-h1 {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2.8rem,5vw,4.2rem); line-height:1.0; letter-spacing:0.03em;
-  margin-bottom:14px;
-  background:linear-gradient(135deg,#fff 0%,var(--gold-light) 50%,var(--blue-light) 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-}
-
-.lesson-meta { display:flex; gap:18px; flex-wrap:wrap; font-size:0.82rem; color:var(--muted); margin-bottom:20px; font-weight:500; }
-.intro-text { font-size:1rem; color:rgba(232,236,244,0.7); line-height:1.85; max-width:620px; }
-
-/* ── SECTIONS ── */
-.lesson-section { margin-bottom:60px; scroll-margin-top:28px; }
-.section-number {
-  font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:5px;
-}
-
-h2 { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:0.04em; margin-bottom:12px; line-height:1.1; }
-h3 { font-family:'Cabinet Grotesk',sans-serif; font-weight:700; font-size:1.05rem; margin-bottom:10px; }
-p { color:rgba(232,236,244,0.76); margin-bottom:14px; }
-p:last-child { margin-bottom:0; }
-strong { color:var(--text); font-weight:700; }
-a { color:var(--gold-light); }
-code {
-  font-family:'Fira Code',monospace; font-size:12px;
-  background:rgba(255,255,255,0.06); border:1px solid var(--border);
-  padding:2px 7px; border-radius:4px; color:var(--gold-light);
-}
-
-/* ── DIAGRAM ── */
-.diagram {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:14px; padding:26px; margin:22px 0;
-}
-.diagram-title {
-  font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:20px; display:flex; align-items:center; gap:10px;
-}
-.diagram-title::after { content:''; flex:1; height:1px; background:var(--border); }
-
-.flow { display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:0; }
-.flow-step { display:flex; flex-direction:column; align-items:center; gap:8px; min-width:88px; }
-.flow-icon { width:56px; height:56px; border-radius:12px; display:grid; place-items:center; font-size:24px; border:1px solid var(--border); }
-.flow-label { font-size:11px; color:var(--muted); text-align:center; line-height:1.3; font-weight:600; }
-.flow-sub { font-size:9px; color:rgba(90,102,128,0.6); text-align:center; }
-.flow-arrow { font-size:16px; color:var(--border); padding:0 6px; margin-bottom:20px; }
-
-/* ── CODE BLOCKS ── */
-.code-block { background:#07090e; border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:18px 0; }
-.code-header {
-  background:var(--surface2); border-bottom:1px solid var(--border);
-  padding:8px 14px; display:flex; align-items:center; gap:7px;
-}
-.code-dot { width:9px; height:9px; border-radius:50%; }
-.code-filename { font-family:'Fira Code',monospace; font-size:11px; color:var(--muted); margin-left:4px; }
-pre { padding:18px 20px; overflow-x:auto; font-family:'Fira Code',monospace; font-size:12.5px; line-height:1.75; }
-.kw{color:#c4b5fd;} .tc{color:#7fb3d3;} .at{color:var(--gold-light);}
-.vl{color:#86efac;} .cm{color:#2a3347;font-style:italic;} .tx{color:#e8ecf4;}
-.st{color:#fda4af;}
-
-/* ── CALLOUTS ── */
-.callout { border-radius:12px; padding:16px 20px; margin:18px 0; display:flex; gap:14px; }
-.callout-tip  { background:rgba(45,158,107,0.07); border:1px solid rgba(45,158,107,0.2); }
-.callout-note { background:rgba(37,99,168,0.07); border:1px solid rgba(37,99,168,0.22); }
-.callout-warn { background:rgba(201,168,76,0.07); border:1px solid rgba(201,168,76,0.2); }
-.callout-tool { background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.18); }
-.callout-wv   { background:rgba(37,99,168,0.08); border-left:3px solid var(--gold); border-radius:0 12px 12px 0; }
-.callout-icon { font-size:18px; flex-shrink:0; margin-top:2px; }
-.callout-body { flex:1; }
-.callout-label {
-  font-size:9px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:4px;
-}
-.callout-tip  .callout-label { color:var(--green-light); }
-.callout-note .callout-label { color:var(--blue-light); }
-.callout-warn .callout-label { color:var(--gold-light); }
-.callout-tool .callout-label { color:var(--gold-light); }
-.callout-wv   .callout-label { color:var(--gold); }
-.callout p { font-size:0.87rem; margin:0; }
-
-/* ── STEPS ── */
-.steps { display:flex; flex-direction:column; gap:12px; margin:18px 0; }
-.step {
-  display:flex; gap:16px; align-items:flex-start;
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:12px; padding:16px; transition:border-color 0.18s;
-}
-.step:hover { border-color:rgba(201,168,76,0.25); }
-.step-num {
-  width:28px; height:28px; border-radius:7px; flex-shrink:0;
-  background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.22);
-  color:var(--gold-light); font-weight:800; font-size:12px; display:grid; place-items:center;
-}
-.step-content h4 { font-weight:700; font-size:0.93rem; margin-bottom:4px; }
-.step-content p { margin:0; font-size:0.85rem; color:var(--muted); }
-
-/* ── TRY IT ── */
-.try-it { background:var(--surface2); border:1px solid var(--border); border-radius:14px; padding:22px; margin:20px 0; }
-.try-it-badge {
-  display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.22);
-  color:var(--gold-light); font-weight:700; font-size:9px; letter-spacing:0.1em; text-transform:uppercase;
-  padding:3px 10px; border-radius:5px; margin-bottom:10px;
-}
-.try-it h3 { font-weight:700; font-size:0.98rem; margin-bottom:8px; }
-.try-it p, .try-it ol, .try-it ul { font-size:0.87rem; color:var(--muted); }
-.try-it ol, .try-it ul { padding-left:18px; }
-.try-it li { margin-bottom:6px; }
-.try-it li strong { color:var(--text); }
-
-/* ── TOOL CARD ── */
-.tool-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:13px; padding:18px 20px; margin-bottom:10px;
-  display:flex; gap:16px; align-items:flex-start; transition:border-color 0.18s;
-}
-.tool-card:hover { border-color:rgba(201,168,76,0.28); }
-.tool-emoji { font-size:26px; flex-shrink:0; }
-.tool-info { flex:1; }
-.tool-name { font-weight:800; font-size:0.97rem; margin-bottom:2px; }
-.tool-desc { font-size:0.83rem; color:var(--muted); margin-bottom:8px; }
-.tool-link {
-  display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:700;
-  letter-spacing:0.06em; text-transform:uppercase; color:var(--gold-light); text-decoration:none;
-  border:1px solid rgba(201,168,76,0.25); border-radius:6px; padding:4px 10px; transition:all 0.18s;
-}
-.tool-link:hover { background:rgba(201,168,76,0.1); }
-
-/* ── PROMPT BOX ── */
-.prompt-box {
-  background:#07090e; border:1px solid rgba(201,168,76,0.22);
-  border-radius:12px; padding:18px 20px; margin:16px 0; position:relative;
-}
-.prompt-box::before {
-  content:'🤖 Prompt to Use';
-  position:absolute; top:-10px; left:14px;
-  background:var(--gold); color:#060810; font-weight:700; font-size:9px;
-  letter-spacing:0.08em; text-transform:uppercase; padding:3px 10px; border-radius:5px;
-}
-.prompt-box p { font-family:'Fira Code',monospace; font-size:11.5px; color:var(--gold-light); line-height:1.8; margin:0; white-space:pre-wrap; }
-
-/* ── EXERCISE ── */
-.exercise {
-  background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(37,99,168,0.05));
-  border:1px solid rgba(201,168,76,0.16); border-radius:16px; padding:26px; margin:26px 0;
-}
-.exercise-label {
-  font-size:9px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
-  color:var(--gold-light); margin-bottom:8px;
-}
-.exercise h3 { font-size:1.08rem; margin-bottom:8px; }
-.exercise p { font-size:0.88rem; }
-.exercise ul { padding-left:18px; color:var(--muted); font-size:0.87rem; margin-top:10px; }
-.exercise ul li { margin-bottom:6px; }
-.exercise ul li strong { color:var(--text); }
-
-/* ── HTML TREE ── */
-.html-tree { font-family:'Fira Code',monospace; font-size:12px; }
-.tree-node { display:flex; align-items:flex-start; margin-bottom:4px; }
-.tree-indent { width:22px; flex-shrink:0; position:relative; }
-.tree-indent::before { content:''; position:absolute; left:10px; top:0; bottom:-4px; width:1px; background:var(--border); }
-.tree-indent::after { content:''; position:absolute; left:10px; top:11px; width:9px; height:1px; background:var(--border); }
-.tree-tag { padding:3px 9px; border-radius:4px; font-size:11px; display:inline-flex; align-items:center; gap:5px; }
-.tag-html { background:rgba(201,168,76,0.12); color:var(--gold-light); border:1px solid rgba(201,168,76,0.2); }
-.tag-head { background:rgba(37,99,168,0.12); color:var(--blue-light); border:1px solid rgba(37,99,168,0.22); }
-.tag-body { background:rgba(45,158,107,0.1); color:var(--green-light); border:1px solid rgba(45,158,107,0.2); }
-.tag-elem { background:rgba(58,124,165,0.1); color:var(--steel-light); border:1px solid rgba(58,124,165,0.2); }
-.tag-desc { font-size:10px; color:var(--muted); margin-left:7px; align-self:center; font-family:'Cabinet Grotesk',sans-serif; }
-
-/* ── DEVTOOLS MOCK ── */
-.devtools-mock { background:#08090f; border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:18px 0; }
-.devtools-tabs { display:flex; background:#0a0c14; border-bottom:1px solid var(--border); }
-.devtools-tab { padding:7px 14px; font-size:11px; color:var(--muted); border-right:1px solid var(--border); }
-.devtools-tab.active { color:var(--gold-light); background:#08090f; }
-.devtools-content { padding:14px; font-family:'Fira Code',monospace; font-size:11.5px; line-height:1.85; }
-
-/* ── COMPLETE ── */
-.complete-section {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:16px; padding:30px; text-align:center; margin-top:56px;
-}
-.complete-section h3 { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:0.05em; margin-bottom:6px; }
-.complete-section p { color:var(--muted); font-size:0.87rem; margin-bottom:18px; }
-.btn-complete {
-  display:inline-flex; align-items:center; gap:8px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-dim));
-  border:none; color:#060810; cursor:pointer; font-weight:800; font-size:13px;
-  letter-spacing:0.04em; padding:13px 28px; border-radius:9px; transition:all 0.2s;
-}
-.btn-complete:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,168,76,0.25); }
-.btn-complete.done { background:var(--green); color:#fff; cursor:default; transform:none; box-shadow:none; }
-
-.nav-btn-row { display:flex; gap:10px; justify-content:center; margin-top:14px; }
-.nav-btn {
-  display:inline-flex; align-items:center; gap:7px;
-  border:1px solid var(--border); background:transparent; color:var(--muted);
-  font-weight:700; font-size:12px; padding:9px 18px; border-radius:9px;
-  cursor:pointer; text-decoration:none; transition:all 0.18s;
-}
-.nav-btn:hover { border-color:var(--gold-light); color:var(--text); }
-
-/* ── WV CALLOUT special ── */
-.wv-example {
-  background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(37,99,168,0.06));
-  border:1px solid rgba(201,168,76,0.2); border-radius:13px; padding:18px 20px; margin:18px 0;
-}
-.wv-example-label {
-  display:inline-flex; align-items:center; gap:6px;
-  font-size:9px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--gold); margin-bottom:8px;
-}
-.wv-example p { font-size:0.87rem; color:rgba(232,236,244,0.75); margin:0; }
-
-::-webkit-scrollbar { width:5px; }
-::-webkit-scrollbar-track { background:transparent; }
-::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
-
-@media (max-width:768px) {
-  .sidebar { display:none; }
-  .main { margin-left:0; padding:28px 18px 80px; }
-}
-
-.time-badge { display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);color:var(--gold-light);border-radius:7px;padding:4px 12px;font-size:11px;font-weight:500;margin-bottom:14px; }
-.check-item { display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 17px;cursor:pointer;transition:all 0.18s;margin-bottom:7px; }
-.check-item:hover { border-color:rgba(45,158,107,0.3); }
-.check-item.checked { border-color:rgba(45,158,107,0.38);background:rgba(45,158,107,0.05); }
-.check-box { width:21px;height:21px;border-radius:5px;border:2px solid var(--border);display:grid;place-items:center;flex-shrink:0;transition:all 0.18s;font-size:11px;color:transparent; }
-.check-item.checked .check-box { background:var(--green);border-color:var(--green);color:#fff; }
-.check-label { font-size:0.87rem; }
-.check-item.checked .check-label { color:var(--muted);text-decoration:line-through; }
-.install-step { background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:10px; }
-.install-step h4 { font-weight:700;font-size:0.92rem;margin-bottom:5px; }
-.install-step p { font-size:0.84rem;color:var(--muted);margin:0; }
-.install-step a { color:var(--gold-light); }
-.platform-btn { display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);text-decoration:none;border-radius:8px;padding:8px 15px;font-size:12px;font-weight:500;transition:all 0.18s;margin:4px 4px 4px 0; }
-.platform-btn:hover { border-color:var(--gold-light);color:var(--gold-light); }
-.screenshot-mock { background:var(--surface2);border:1px solid var(--border);border-radius:13px;overflow:hidden;margin:14px 0; }
-.screenshot-titlebar { background:#0d0f18;border-bottom:1px solid var(--border);padding:9px 15px;display:flex;align-items:center;gap:7px; }
-.titlebar-dot { width:10px;height:10px;border-radius:50%; }
-.titlebar-label { font-size:11px;color:var(--muted);margin-left:5px;font-family:'Fira Code',monospace; }
-.screenshot-body { padding:16px 18px;font-family:'Fira Code',monospace;font-size:12px;line-height:1.85; }
-.extension-card { background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:14px 17px;margin-bottom:9px;display:flex;gap:13px;align-items:center; }
-.ext-icon { width:34px;height:34px;border-radius:7px;display:grid;place-items:center;font-size:19px;background:var(--surface2);flex-shrink:0; }
-.ext-name { font-weight:700;font-size:0.88rem;margin-bottom:2px; }
-.ext-desc { font-size:0.79rem;color:var(--muted); }
-.ext-badge { margin-left:auto;flex-shrink:0;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted); }
-.ext-badge.must { background:rgba(45,158,107,0.1);border-color:rgba(45,158,107,0.25);color:var(--green-light); }
-.gh-concept { background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:9px;display:flex;gap:13px; }
-.gh-icon { font-size:20px;flex-shrink:0; }
-.gh-title { font-weight:700;font-size:0.9rem;margin-bottom:3px; }
-.gh-desc { font-size:0.82rem;color:var(--muted);margin:0; }
-.commit-row { display:flex;align-items:flex-start;gap:13px;padding:13px 0;border-bottom:1px solid var(--border); }
-.commit-row:last-child{border-bottom:none;}
-.commit-dot{width:11px;height:11px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:4px;}
-.commit-msg{font-family:'Fira Code',monospace;font-size:12px;color:var(--gold-light);margin-bottom:2px;}
-.commit-sub{font-size:11px;color:var(--muted);}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 00 :: Setup :: MØNTAN1 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/academy.css">
 </head>
 <body>
-<aside class="sidebar"><div class="sidebar-logo">
-  <div class="sidebar-logo-mark">M</div>
-  <div><div class="sidebar-org">m0ntan1</div><div class="sidebar-sub">VIBE ACADEMY</div></div>
-</div>
-<div class="sidebar-tagline">montaniai.org</div>
-<a class="nav-item " href="../index.html"><span class="nav-icon">🏠</span> Home</a>
-<a class="nav-item active" href="../setup.html"><span class="nav-icon">🛠</span> Setup Day</a>
-<div class="nav-divider"></div>
-<div class="nav-section-label">⛰ Phase 1 — Foundations</div>
-<a class="nav-item nav-week " data-week="1" href="../weeks/week1.html"><span class="nav-icon">W1</span> Internet Basics</a>
-<a class="nav-item nav-week " data-week="2" href="../weeks/week2.html"><span class="nav-icon">W2</span> CSS & Style</a>
-<a class="nav-item nav-week " data-week="3" href="../weeks/week3.html"><span class="nav-icon">W3</span> JavaScript</a>
-<a class="nav-item nav-week " data-week="4" href="../weeks/week4.html"><span class="nav-icon">W4</span> AI Co-Pilot</a>
-<div class="nav-divider"></div>
-<div class="nav-section-label">⚡ Phase 2 — Build Things</div>
-<a class="nav-item nav-week " data-week="5" href="../weeks/week5.html"><span class="nav-icon">W5</span> Your First Site</a>
-<a class="nav-item nav-week " data-week="6" href="../weeks/week6.html"><span class="nav-icon">W6</span> Landing Pages</a>
-<a class="nav-item nav-week " data-week="7" href="../weeks/week7.html"><span class="nav-icon">W7</span> APIs</a>
-<a class="nav-item nav-week " data-week="8" href="../weeks/week8.html"><span class="nav-icon">W8</span> AI Apps</a>
-<div class="nav-divider"></div>
-<div class="nav-section-label">🚀 Phase 3 — Ship It</div>
-<a class="nav-item nav-week " data-week="9" href="../weeks/week9.html"><span class="nav-icon">W9</span> Hybrid Stack</a>
-<a class="nav-item nav-week " data-week="10" href="../weeks/week10.html"><span class="nav-icon">W10</span> Automations</a>
-<a class="nav-item nav-week " data-week="11" href="../weeks/week11.html"><span class="nav-icon">W11</span> Ship a Product</a>
-<a class="nav-item nav-week " data-week="12" href="../weeks/week12.html"><span class="nav-icon">W12</span> What's Next</a>
-<div class="nav-divider"></div>
-<div class="sidebar-progress">
-  <div class="sp-label"><span>Your progress</span><span id="sp-label">0 / 12</span></div>
-  <div class="sp-bar"><div class="sp-fill" id="sp-fill" style="width:0%"></div></div>
-</div></aside>
-<main class="main">
 
-<div class="lesson-header">
-  <div class="week-badge setup">🛠 Setup Day · Do This First</div>
-  <h1>Get Your Tools<br>Ready to Build</h1>
-  <div class="lesson-meta">
-    <span>⏱ ~45 minutes</span>
-    <span>💻 Mac &amp; Windows</span>
-    <span>💸 100% Free</span>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="index.html">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></a>
+    <nav>
+      <a href="index.html">Curriculum</a>
+      <a href="setup.html">Setup</a>
+    </nav>
+    <a class="cta" href="https://m0ntan1.com">MØNTAN1</a>
+  </header>
+
+  <section class="lesson-head">
+    <div class="eyebrow">[ SECTION 00 :: BEFORE YOU START ]</div>
+    <h1>Setup<span class="red">.</span></h1>
+    <p class="intro">Before Section 01, stand up the five free tools the whole primer runs on. One sitting, no credit card, no excuses.</p>
+    <div class="lesson-meta">
+      <span><b>Time</b> ~30 min</span>
+      <span><b>Tools</b> GitHub, VS Code, Claude, Netlify, Replit</span>
+      <span><b>Cost</b> $0</span>
+    </div>
+  </section>
+
+  <div class="tool-rail reveal">
+    <span class="tr-label">Tools</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></span>GitHub</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.4 2.1 9.9 9.3 5.3 5.8l-1.7.8 3.9 5.4-3.9 5.4 1.7.8 4.6-3.5 7.5 7.2 3-1.5V3.6l-3-1.5zm.1 4.6v10.6l-5.6-5.3 5.6-5.3z"/></svg></span>VS Code</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5 13.9 8l4.7-4.8 1.3 1.3L15.1 9.3l6.4-.9.3 1.8-6.4.9 5.8 2.9-.9 1.7-5.8-2.9 3.4 5.5-1.6 1-3.4-5.5-.6 6.5-1.8-.2.6-6.5-4.7 4.5-1.3-1.3 4.7-4.5-6.4 1.3-.4-1.8 6.4-1.3-5.9-2.7.8-1.7 5.9 2.7L8 3l1.7-.8 2.3 6V1.5z"/></svg></span>Claude</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2 21.8 12 12 21.8 2.2 12 12 2.2zm0 3.6L7.6 10v4l4.4 4.2L16.4 14v-4L12 5.8zm0 3.3 2.5 2.5L12 14.1 9.5 11.6 12 9.1z"/></svg></span>Netlify</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7z"/></svg></span>Replit</span>
   </div>
-  <p class="intro-text">Everything you need is free. Everything works on a basic laptop. If you're in WV without reliable internet, most of this works offline after the first setup. Let's start with the most important tool — GitHub.</p>
-</div>
 
+  <div class="objectives reveal">
+    <h3>You will learn</h3>
+    <ul>
+      <li>Create a GitHub account: where every build you make will live</li>
+      <li>Install VS Code: the editor you will write everything in</li>
+      <li>Get Claude access: the co-pilot for the entire primer</li>
+      <li>Connect Netlify: how your work gets onto the open internet</li>
+      <li>Open Replit: server code in the browser, for the later sections</li>
+    </ul>
+  </div>
+
+  <div class="tool-grid reveal">
+      <div class="tg-cell"><span class="tg-logo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></span><span class="tg-name">GitHub</span><span class="tg-sub">Your code's home</span></div>
+      <div class="tg-cell"><span class="tg-logo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.4 2.1 9.9 9.3 5.3 5.8l-1.7.8 3.9 5.4-3.9 5.4 1.7.8 4.6-3.5 7.5 7.2 3-1.5V3.6l-3-1.5zm.1 4.6v10.6l-5.6-5.3 5.6-5.3z"/></svg></span><span class="tg-name">VS Code</span><span class="tg-sub">Where you write</span></div>
+      <div class="tg-cell"><span class="tg-logo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5 13.9 8l4.7-4.8 1.3 1.3L15.1 9.3l6.4-.9.3 1.8-6.4.9 5.8 2.9-.9 1.7-5.8-2.9 3.4 5.5-1.6 1-3.4-5.5-.6 6.5-1.8-.2.6-6.5-4.7 4.5-1.3-1.3 4.7-4.5-6.4 1.3-.4-1.8 6.4-1.3-5.9-2.7.8-1.7 5.9 2.7L8 3l1.7-.8 2.3 6V1.5z"/></svg></span><span class="tg-name">Claude</span><span class="tg-sub">Your co-pilot</span></div>
+      <div class="tg-cell"><span class="tg-logo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2 21.8 12 12 21.8 2.2 12 12 2.2zm0 3.6L7.6 10v4l4.4 4.2L16.4 14v-4L12 5.8zm0 3.3 2.5 2.5L12 14.1 9.5 11.6 12 9.1z"/></svg></span><span class="tg-name">Netlify</span><span class="tg-sub">Ship to the web</span></div>
+      <div class="tg-cell"><span class="tg-logo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7z"/></svg></span><span class="tg-name">Replit</span><span class="tg-sub">Server in the browser</span></div>
+    </div>
+
+  <!-- Lesson body ported at build time from weeks/week0-setup.html -->
 <div class="lesson-section" id="checklist">
   <div class="section-number">Your Checklist</div>
-  <h2>✅ Setup Checklist</h2>
+  <h2>Setup Checklist</h2>
   <div id="checklistItems">
-    <div class="check-item" onclick="toggleCheck(this,'c1')" data-key="c1"><div class="check-box">✓</div><span class="check-label">Created a free GitHub account</span></div>
-    <div class="check-item" onclick="toggleCheck(this,'c2')" data-key="c2"><div class="check-box">✓</div><span class="check-label">Installed GitHub Desktop and signed in</span></div>
-    <div class="check-item" onclick="toggleCheck(this,'c3')" data-key="c3"><div class="check-box">✓</div><span class="check-label">Created your first repository</span></div>
-    <div class="check-item" onclick="toggleCheck(this,'c4')" data-key="c4"><div class="check-box">✓</div><span class="check-label">Downloaded &amp; installed VS Code</span></div>
-    <div class="check-item" onclick="toggleCheck(this,'c5')" data-key="c5"><div class="check-box">✓</div><span class="check-label">Installed Prettier, Live Server, and GitHub extensions</span></div>
-    <div class="check-item" onclick="toggleCheck(this,'c6')" data-key="c6"><div class="check-box">✓</div><span class="check-label">Signed up for Claude.ai and sent a test message</span></div>
-    <div class="check-item" onclick="toggleCheck(this,'c7')" data-key="c7"><div class="check-box">✓</div><span class="check-label">Created a free Netlify account (signed in with GitHub)</span></div>
-    <div class="check-item" onclick="toggleCheck(this,'c8')" data-key="c8"><div class="check-box">✓</div><span class="check-label">Created a free Replit account</span></div>
+    <div class="check-item" onclick="toggleCheck(this,'c1')" data-key="c1"><div class="check-box"></div><span class="check-label">Created a free GitHub account</span></div>
+    <div class="check-item" onclick="toggleCheck(this,'c2')" data-key="c2"><div class="check-box"></div><span class="check-label">Installed GitHub Desktop and signed in</span></div>
+    <div class="check-item" onclick="toggleCheck(this,'c3')" data-key="c3"><div class="check-box"></div><span class="check-label">Created your first repository</span></div>
+    <div class="check-item" onclick="toggleCheck(this,'c4')" data-key="c4"><div class="check-box"></div><span class="check-label">Downloaded &amp; installed VS Code</span></div>
+    <div class="check-item" onclick="toggleCheck(this,'c5')" data-key="c5"><div class="check-box"></div><span class="check-label">Installed Prettier, Live Server, and GitHub extensions</span></div>
+    <div class="check-item" onclick="toggleCheck(this,'c6')" data-key="c6"><div class="check-box"></div><span class="check-label">Signed up for Claude.ai and sent a test message</span></div>
+    <div class="check-item" onclick="toggleCheck(this,'c7')" data-key="c7"><div class="check-box"></div><span class="check-label">Created a free Netlify account (signed in with GitHub)</span></div>
+    <div class="check-item" onclick="toggleCheck(this,'c8')" data-key="c8"><div class="check-box"></div><span class="check-label">Created a free Replit account</span></div>
   </div>
 </div>
 
 <div class="lesson-section" id="github">
-  <div class="section-number">Tool 1 — Start Here</div>
-  <h2>🐙 GitHub — Your Code's Home</h2>
+  <div class="section-number">Tool 1 :: Start Here</div>
+  <h2>GitHub :: Your Code's Home</h2>
   <div class="time-badge">⏱ ~15 minutes · Most important setup of the day</div>
-  <p><strong>What it is:</strong> GitHub saves every version of every file you write — forever. Every project gets its own folder (called a repository). Every change you save (a commit) is logged with a message. You can go back to any point in history, see what changed, and share your work with the world.</p>
-  <p><strong>Why we start here:</strong> GitHub connects to every other tool — VS Code, Netlify, Replit. Set it up first and everything else plugs in cleanly. By Week 12, your GitHub profile will be a full portfolio of everything you built.</p>
+  <p><strong>What it is:</strong> GitHub saves every version of every file you write :: forever. Every project gets its own folder (called a repository). Every change you save (a commit) is logged with a message. You can go back to any point in history, see what changed, and share your work with the world.</p>
+  <p><strong>Why we start here:</strong> GitHub connects to every other tool :: VS Code, Netlify, Replit. Set it up first and everything else plugs in cleanly. By Section 12, your GitHub profile will be a full portfolio of everything you built.</p>
 
   <div class="callout callout-wv">
-    <span class="callout-icon">🏔</span>
+    <span class="callout-icon"></span>
     <div class="callout-body">
       <div class="callout-label">WV Opportunity</div>
-      <p>A filled GitHub profile is a public résumé that employers across the country can see. A developer in Charleston with a strong GitHub profile can get remote work paying $60–90k+. This is one of the fastest paths to remote income from anywhere in West Virginia.</p>
+      <p>A filled GitHub profile is a public résumé that employers across the country can see. A developer in Charleston with a strong GitHub profile can get remote work paying $60 :: 90k+. This is one of the fastest paths to remote income from anywhere in West Virginia.</p>
     </div>
   </div>
 
   <h3 style="margin-top:24px">Four things you need to understand</h3>
   <div style="margin:14px 0">
-    <div class="gh-concept"><div class="gh-icon">📁</div><div><div class="gh-title">Repository (Repo)</div><p class="gh-desc">A project folder GitHub tracks. One repo per project. You'll create a new one each week.</p></div></div>
-    <div class="gh-concept"><div class="gh-icon">📸</div><div><div class="gh-title">Commit</div><p class="gh-desc">A saved snapshot with a message. "Added homepage HTML." You can return to any commit ever made.</p></div></div>
-    <div class="gh-concept"><div class="gh-icon">⬆️</div><div><div class="gh-title">Push</div><p class="gh-desc">Sending your local commits to GitHub's servers. Do this at the end of every session.</p></div></div>
-    <div class="gh-concept"><div class="gh-icon">🌐</div><div><div class="gh-title">Your Profile</div><p class="gh-desc">github.com/yourname — a public page showing everything you've built. This is your portfolio.</p></div></div>
+    <div class="gh-concept"><div class="gh-icon"></div><div><div class="gh-title">Repository (Repo)</div><p class="gh-desc">A project folder GitHub tracks. One repo per project. You'll create a new one each week.</p></div></div>
+    <div class="gh-concept"><div class="gh-icon"></div><div><div class="gh-title">Commit</div><p class="gh-desc">A saved snapshot with a message. "Added homepage HTML." You can return to any commit ever made.</p></div></div>
+    <div class="gh-concept"><div class="gh-icon"></div><div><div class="gh-title">Push</div><p class="gh-desc">Sending your local commits to GitHub's servers. Do this at the end of every session.</p></div></div>
+    <div class="gh-concept"><div class="gh-icon"></div><div><div class="gh-title">Your Profile</div><p class="gh-desc">github.com/yourname :: a public page showing everything you've built. This is your portfolio.</p></div></div>
   </div>
 
-  <h3 style="margin-top:22px">Your commit history — what 12 weeks looks like</h3>
+  <h3 style="margin-top:22px">Your commit history :: what twelve sections looks like</h3>
   <div class="diagram">
-    <div class="diagram-title">📸 Each commit is a permanent save point</div>
-    <div class="commit-row"><div class="commit-dot"></div><div><div class="commit-msg">Initial commit — about me page HTML</div><div class="commit-sub">Week 1 · your first ever commit</div></div></div>
-    <div class="commit-row"><div class="commit-dot" style="background:var(--blue)"></div><div><div class="commit-msg" style="color:var(--blue-light)">Add CSS styling and Google Font</div><div class="commit-sub">Week 2</div></div></div>
-    <div class="commit-row"><div class="commit-dot" style="background:var(--steel)"></div><div><div class="commit-msg" style="color:var(--steel-light)">Add interactive quiz with score tracker</div><div class="commit-sub">Week 3</div></div></div>
-    <div class="commit-row"><div class="commit-dot" style="background:var(--green)"></div><div><div class="commit-msg" style="color:var(--green-light)">Launch portfolio site to Netlify — live URL</div><div class="commit-sub">Week 5 · anyone in the world can see this now</div></div></div>
+    <div class="diagram-title"> Each commit is a permanent save point</div>
+    <div class="commit-row"><div class="commit-dot"></div><div><div class="commit-msg">Initial commit :: about me page HTML</div><div class="commit-sub">Section 1 · your first ever commit</div></div></div>
+    <div class="commit-row"><div class="commit-dot" style="background:var(--blue)"></div><div><div class="commit-msg" style="color:var(--blue-light)">Add CSS styling and Google Font</div><div class="commit-sub">Section 2</div></div></div>
+    <div class="commit-row"><div class="commit-dot" style="background:var(--steel)"></div><div><div class="commit-msg" style="color:var(--steel-light)">Add interactive quiz with score tracker</div><div class="commit-sub">Section 3</div></div></div>
+    <div class="commit-row"><div class="commit-dot" style="background:var(--green)"></div><div><div class="commit-msg" style="color:var(--green-light)">Launch portfolio site to Netlify :: live URL</div><div class="commit-sub">Section 5 · anyone in the world can see this now</div></div></div>
   </div>
 
   <div class="install-step">
-    <h4>Step 1 — Create your GitHub account at github.com</h4>
+    <h4>Step 1 :: Create your GitHub account at github.com</h4>
     <p>Pick a username you'd be comfortable sharing. It appears in all your project URLs: <code>github.com/yourname/project</code>.</p>
     <div style="margin-top:10px"><a class="platform-btn" href="https://github.com/signup" target="_blank">→ Sign up at GitHub</a></div>
   </div>
   <div class="install-step">
-    <h4>Step 2 — Install GitHub Desktop</h4>
-    <p>A visual interface for GitHub — no command-line needed. Download, install, and sign in with your new GitHub account.</p>
+    <h4>Step 2 :: Install GitHub Desktop</h4>
+    <p>A visual interface for GitHub :: no command-line needed. Download, install, and sign in with your new GitHub account.</p>
     <div style="margin-top:10px">
-      <a class="platform-btn" href="https://desktop.github.com" target="_blank">🍎 Mac</a>
-      <a class="platform-btn" href="https://desktop.github.com" target="_blank">🪟 Windows</a>
+      <a class="platform-btn" href="https://desktop.github.com" target="_blank"> Mac</a>
+      <a class="platform-btn" href="https://desktop.github.com" target="_blank"> Windows</a>
     </div>
   </div>
   <div class="install-step">
-    <h4>Step 3 — Create your first repository</h4>
+    <h4>Step 3 :: Create your first repository</h4>
     <p>In GitHub Desktop: File → New Repository → name it <code>montani-vibe-projects</code> → check "Initialize with README" → Create. Then click "Publish repository" to put it live on GitHub.</p>
   </div>
 
   <div class="callout callout-tip">
-    <span class="callout-icon">✍️</span>
+    <span class="callout-icon"></span>
     <div class="callout-body">
       <div class="callout-label">Write good commit messages from day one</div>
-      <p>Describe what changed in plain English. "Add nav bar with links to all pages" is great. "update" is useless. Your commit history is a diary of your growth — make it readable.</p>
+      <p>Describe what changed in plain English. "Add nav bar with links to all pages" is great. "update" is useless. Your commit history is a diary of your growth :: make it readable.</p>
     </div>
   </div>
 
-  <h3 style="margin-top:22px">Your weekly loop — 30 seconds once it's habit</h3>
+  <h3 style="margin-top:22px">Your weekly loop :: 30 seconds once it's habit</h3>
   <div class="diagram">
-    <div class="diagram-title">🔁 Write → Save → Commit → Push</div>
+    <div class="diagram-title"> Write → Save → Commit → Push</div>
     <div class="flow">
-      <div class="flow-step"><div class="flow-icon" style="background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.3)">✍️</div><div class="flow-label">Write code</div><div class="flow-sub">VS Code</div></div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.3)"></div><div class="flow-label">Write code</div><div class="flow-sub">VS Code</div></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step"><div class="flow-icon" style="background:rgba(37,99,168,0.12);border-color:rgba(37,99,168,0.3)">💾</div><div class="flow-label">Save file</div><div class="flow-sub">Cmd/Ctrl+S</div></div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(37,99,168,0.12);border-color:rgba(37,99,168,0.3)"></div><div class="flow-label">Save file</div><div class="flow-sub">Cmd/Ctrl+S</div></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step"><div class="flow-icon" style="background:rgba(58,124,165,0.12);border-color:rgba(58,124,165,0.3)">📸</div><div class="flow-label">Commit</div><div class="flow-sub">GitHub Desktop</div></div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(58,124,165,0.12);border-color:rgba(58,124,165,0.3)"></div><div class="flow-label">Commit</div><div class="flow-sub">GitHub Desktop</div></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step"><div class="flow-icon" style="background:rgba(45,158,107,0.12);border-color:rgba(45,158,107,0.3)">⬆️</div><div class="flow-label">Push</div><div class="flow-sub">Syncs to GitHub</div></div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(45,158,107,0.12);border-color:rgba(45,158,107,0.3)"></div><div class="flow-label">Push</div><div class="flow-sub">Syncs to GitHub</div></div>
     </div>
   </div>
 </div>
 
 <div class="lesson-section" id="vscode">
   <div class="section-number">Tool 2</div>
-  <h2>🆚 VS Code — Where You Write Code</h2>
+  <h2>VS Code :: Where You Write Code</h2>
   <div class="time-badge">⏱ ~8 minutes</div>
   <p><strong>What it is:</strong> VS Code is a free code editor used by the majority of developers worldwide. It colors your code so it's readable, catches typos, auto-closes tags, and connects directly to your GitHub repository.</p>
   <div class="install-step">
     <h4>Download and install VS Code</h4>
-    <p>Go to <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a> — auto-detects Mac or Windows.</p>
+    <p>Go to <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a> :: auto-detects Mac or Windows.</p>
     <div style="margin-top:10px">
-      <a class="platform-btn" href="https://code.visualstudio.com/Download" target="_blank">🍎 Mac</a>
-      <a class="platform-btn" href="https://code.visualstudio.com/Download" target="_blank">🪟 Windows</a>
+      <a class="platform-btn" href="https://code.visualstudio.com/Download" target="_blank"> Mac</a>
+      <a class="platform-btn" href="https://code.visualstudio.com/Download" target="_blank"> Windows</a>
     </div>
   </div>
   <div class="install-step" style="margin-top:10px">
@@ -537,24 +167,24 @@ pre { padding:18px 20px; overflow-x:auto; font-family:'Fira Code',monospace; fon
     <p>In GitHub Desktop → Repository → Open in Visual Studio Code. Now VS Code is pointed directly at your GitHub folder.</p>
   </div>
   <h3 style="margin-top:22px">Install these three extensions</h3>
-  <p>Click the 🧩 Extensions icon in VS Code's left sidebar, search by name, click Install.</p>
-  <div class="extension-card"><div class="ext-icon">✨</div><div><div class="ext-name">Prettier</div><div class="ext-desc">Auto-formats your code whenever you save. Makes everything look clean immediately.</div></div><div class="ext-badge must">Must Have</div></div>
-  <div class="extension-card"><div class="ext-icon">🔵</div><div><div class="ext-name">Live Server</div><div class="ext-desc">Right-click any HTML file → "Open with Live Server" → your page opens in the browser and refreshes as you type.</div></div><div class="ext-badge must">Must Have</div></div>
-  <div class="extension-card"><div class="ext-icon">🐙</div><div><div class="ext-name">GitHub Pull Requests (by GitHub)</div><div class="ext-desc">Shows your GitHub repo status inside VS Code without switching windows.</div></div><div class="ext-badge must">Must Have</div></div>
+  <p>Click the  Extensions icon in VS Code's left sidebar, search by name, click Install.</p>
+  <div class="extension-card"><div class="ext-icon"></div><div><div class="ext-name">Prettier</div><div class="ext-desc">Auto-formats your code whenever you save. Makes everything look clean immediately.</div></div><div class="ext-badge must">Must Have</div></div>
+  <div class="extension-card"><div class="ext-icon"></div><div><div class="ext-name">Live Server</div><div class="ext-desc">Right-click any HTML file → "Open with Live Server" → your page opens in the browser and refreshes as you type.</div></div><div class="ext-badge must">Must Have</div></div>
+  <div class="extension-card"><div class="ext-icon"></div><div><div class="ext-name">GitHub Pull Requests (by GitHub)</div><div class="ext-desc">Shows your GitHub repo status inside VS Code without switching windows.</div></div><div class="ext-badge must">Must Have</div></div>
 </div>
 
 <div class="lesson-section" id="claude">
   <div class="section-number">Tool 3</div>
-  <h2>🤖 Claude AI — Your Co-Pilot</h2>
+  <h2>Claude AI :: Your Co-Pilot</h2>
   <div class="time-badge">⏱ ~5 minutes</div>
-  <p><strong>What it is:</strong> Claude is the AI you'll use every single week — to write code, explain errors, debug problems, and generate content. Keep it open in a browser tab next to VS Code at all times.</p>
+  <p><strong>What it is:</strong> Claude is the AI you'll use every single week :: to write code, explain errors, debug problems, and generate content. Keep it open in a browser tab next to VS Code at all times.</p>
   <div class="install-step">
     <h4>Create a free Claude.ai account</h4>
-    <p>Go to <a href="https://claude.ai" target="_blank">claude.ai</a> → sign up free. The free plan covers Weeks 1–6. For Weeks 7–12 you'll need an API key — we walk through that when we get there.</p>
+    <p>Go to <a href="https://claude.ai" target="_blank">claude.ai</a> → sign up free. The free plan covers Weeks 1 :: 6. For Weeks 7 :: 12 you'll need an API key :: we walk through that when we get there.</p>
     <div style="margin-top:10px"><a class="platform-btn" href="https://claude.ai" target="_blank">→ Sign up at Claude.ai</a></div>
   </div>
   <div class="callout callout-tool">
-    <span class="callout-icon">🤖</span>
+    <span class="callout-icon"></span>
     <div class="callout-body">
       <div class="callout-label">Try this right now</div>
       <p>Open Claude and type: <em>"I'm starting to learn web development in West Virginia. Write me a simple HTML page with a heading that says 'Hello from WV!' Add comments explaining each line."</em> Copy the code to VS Code, save it, open with Live Server, then commit it to GitHub. That's your first full loop.</p>
@@ -568,137 +198,45 @@ What's wrong and how do I fix it?</p></div>
 
 <div class="lesson-section" id="netlify">
   <div class="section-number">Tool 4</div>
-  <h2>🚀 Netlify — From GitHub to the Internet</h2>
-  <div class="time-badge">⏱ ~3 minutes now · Used from Week 5</div>
+  <h2>Netlify :: From GitHub to the Internet</h2>
+  <div class="time-badge">⏱ ~3 minutes now · Used from Section 5</div>
   <p><strong>What it is:</strong> Free hosting that connects to your GitHub repo. Every time you push code to GitHub, Netlify automatically updates your live site. Push → live in seconds. No server configuration, no cost.</p>
   <div class="install-step">
-    <h4>Create a free Netlify account — sign up with GitHub</h4>
-    <p>Go to <a href="https://netlify.com" target="_blank">netlify.com</a> → Sign Up → <strong>use your GitHub account</strong>. This pre-connects everything so deployment in Week 5 takes one click.</p>
+    <h4>Create a free Netlify account :: sign up with GitHub</h4>
+    <p>Go to <a href="https://netlify.com" target="_blank">netlify.com</a> → Sign Up → <strong>use your GitHub account</strong>. This pre-connects everything so deployment in Section 5 takes one click.</p>
     <div style="margin-top:10px"><a class="platform-btn" href="https://app.netlify.com/signup" target="_blank">→ Sign up at Netlify</a></div>
   </div>
 </div>
 
 <div class="lesson-section" id="replit">
   <div class="section-number">Tool 5</div>
-  <h2>💻 Replit — Server Code in Your Browser</h2>
-  <div class="time-badge">⏱ ~3 minutes · Used from Week 7</div>
-  <p><strong>What it is:</strong> A coding environment that runs entirely in your browser — no installation needed. You'll use it for projects that need a server (like Week 8's AI chatbot). Sign up now, use it later.</p>
+  <h2>Replit :: Server Code in Your Browser</h2>
+  <div class="time-badge">⏱ ~3 minutes · Used from Section 7</div>
+  <p><strong>What it is:</strong> A coding environment that runs entirely in your browser :: no installation needed. You'll use it for projects that need a server (like Section 8's AI chatbot). Sign up now, use it later.</p>
   <div class="install-step">
     <h4>Create a free Replit account</h4>
-    <p><a href="https://replit.com/signup" target="_blank">replit.com/signup</a> — use your Google or GitHub account.</p>
+    <p><a href="https://replit.com/signup" target="_blank">replit.com/signup</a> :: use your Google or GitHub account.</p>
     <div style="margin-top:10px"><a class="platform-btn" href="https://replit.com/signup" target="_blank">→ Sign up at Replit</a></div>
   </div>
 </div>
 
-<div class="complete-section">
-  <h3>You're Set Up — Let's Build</h3>
-  <p>All five tools are ready. Week 1 starts with writing your first HTML and making your first GitHub commit.</p>
-  <a href="weeks/week1.html" class="btn-complete" style="text-decoration:none;display:inline-flex;">Start Week 1 →</a>
+
+
+  <div class="finish">
+    <button class="btn red" data-complete="setup">Mark section complete</button>
+    <div class="pager">
+        
+        <a class="btn ghost" href="sections/section-01.html">Section 01 &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 MØNTAN1 Academy :: Free forever</span>
+    <span>Drawn: B0SEPHUS G. ALTAMONT :: Checked: MERCER LANG</span>
+    <a href="https://m0ntan1.com">m0ntan1.com</a>
+  </footer>
 </div>
 
-</main>
-<script>// ── Progress tracking ──────────────────────────────────────────
-const TOTAL_WEEKS = 12;
-const STORAGE_KEY = 'vibe-dev-completed';
-
-function getCompleted() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; }
-}
-
-function saveCompleted(arr) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); } catch {}
-}
-
-function markWeekComplete(weekNum) {
-  const c = getCompleted();
-  if (!c.includes(weekNum)) { c.push(weekNum); saveCompleted(c); }
-  const btn = document.getElementById('completeBtn');
-  if (btn) { btn.textContent = '🎉 Week ' + weekNum + ' Complete!'; btn.classList.add('done'); btn.disabled = true; }
-  updateSidebarProgress();
-}
-
-function updateSidebarProgress() {
-  const c = getCompleted();
-  const pct = (c.length / TOTAL_WEEKS) * 100;
-  const fill = document.getElementById('sp-fill');
-  const label = document.getElementById('sp-label');
-  if (fill) fill.style.width = pct + '%';
-  if (label) label.textContent = c.length + ' / ' + TOTAL_WEEKS + ' complete';
-  // Mark nav items done
-  document.querySelectorAll('.nav-week').forEach(el => {
-    const w = parseInt(el.dataset.week);
-    if (c.includes(w)) el.classList.add('done');
-    else el.classList.remove('done');
-  });
-}
-
-// ── Scroll-spy for lesson nav ──────────────────────────────────
-function initScrollSpy(sectionIds) {
-  const navLinks = document.querySelectorAll('.lesson-nav-item');
-  if (!navLinks.length) return;
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const match = document.querySelector('.lesson-nav-item[href="#' + e.target.id + '"]');
-        if (match) match.classList.add('active');
-      }
-    });
-  }, { threshold: 0.35 });
-
-  sectionIds.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) observer.observe(el);
-  });
-}
-
-// ── Sidebar active week ────────────────────────────────────────
-function setActiveSidebarWeek(weekNum) {
-  document.querySelectorAll('.nav-week').forEach(el => {
-    el.classList.remove('active', 'p2', 'p3');
-  });
-  const target = document.querySelector('.nav-week[data-week="' + weekNum + '"]');
-  if (target) {
-    target.classList.add('active');
-    if (weekNum >= 5 && weekNum <= 8) target.classList.add('p2');
-    if (weekNum >= 9) target.classList.add('p3');
-  }
-}
-
-// ── Check if this week is already complete and update btn ──────
-function initCompleteBtnState(weekNum) {
-  const c = getCompleted();
-  const btn = document.getElementById('completeBtn');
-  if (btn && c.includes(weekNum)) {
-    btn.textContent = '🎉 Week ' + weekNum + ' Complete!';
-    btn.classList.add('done');
-    btn.disabled = true;
-  }
-}
-
-// ── Run on every page ──────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  updateSidebarProgress();
-});
-
-updateSidebarProgress();
-
-const CHECKS_KEY='montani-setup-checks';
-function getChecks(){try{return JSON.parse(localStorage.getItem(CHECKS_KEY)||'[]');}catch{return[];}}
-function saveChecks(a){try{localStorage.setItem(CHECKS_KEY,JSON.stringify(a));}catch{}}
-function toggleCheck(el,key){
-  el.classList.toggle('checked');
-  const c=getChecks();
-  if(el.classList.contains('checked')){if(!c.includes(key))c.push(key);}
-  else{const i=c.indexOf(key);if(i>-1)c.splice(i,1);}
-  saveChecks(c);
-}
-getChecks().forEach(k=>{
-  const el=document.querySelector('[data-key="'+k+'"]');
-  if(el)el.classList.add('checked');
-});
-
-</script>
+<script src="assets/academy.js"></script>
 </body>
 </html>

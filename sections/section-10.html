@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 10 :: Automations and Workflows :: MØNTAN1 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/academy.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="../index.html">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></a>
+    <nav>
+      <a href="../index.html">Curriculum</a>
+      <a href="../setup.html">Setup</a>
+    </nav>
+    <a class="cta" href="https://m0ntan1.com">MØNTAN1</a>
+  </header>
+
+  <section class="lesson-head">
+    <div class="eyebrow">[ SECTION 10 :: PART III :: SHIP IT ]</div>
+    <h1>Automations and Workflows<span class="red">.</span></h1>
+    <p class="intro">If you do it twice, automate it. Wire apps together with webhooks and put AI steps in the middle.</p>
+    <div class="lesson-meta">
+      <span><b>Time</b> ~60 min</span>
+      <span><b>Tools</b> Make.com</span>
+      <span><b>Cost</b> $0</span>
+    </div>
+  </section>
+
+  <div class="tool-rail reveal">
+    <span class="tr-label">Tools</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h2.4v16H4V4zm4.5 0H11l2 9 2-9h2.5l-3.2 16h-2.6L8.5 4zM19.6 4H22v16h-2.4V4z"/></svg></span>Make.com</span>
+  </div>
+
+  <div class="objectives reveal">
+    <h3>You will learn</h3>
+    <ul>
+      <li>Spot the work that should be automated</li>
+      <li>Build multi-step automations in Make.com</li>
+      <li>Use webhooks to connect apps in real time</li>
+      <li>Add AI steps inside an automation</li>
+    </ul>
+  </div>
+
+  <figure class="pipeline reveal"><figcaption>Automation</figcaption><div class="pl-track">
+        <div class="pl-step">
+          <span class="pl-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 7 3 12l5 5M16 7l5 5-5 5M13 5l-2 14"/></svg></span>
+          <span class="pl-label">Trigger</span>
+          <span class="pl-sub">webhook fires</span>
+        </div><span class="pl-arrow">&rarr;</span>
+        <div class="pl-step">
+          <span class="pl-logo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h2.4v16H4V4zm4.5 0H11l2 9 2-9h2.5l-3.2 16h-2.6L8.5 4zM19.6 4H22v16h-2.4V4z"/></svg></span>
+          <span class="pl-label">Process</span>
+          <span class="pl-sub">Make.com steps</span>
+        </div><span class="pl-arrow">&rarr;</span>
+        <div class="pl-step">
+          <span class="pl-logo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5 13.9 8l4.7-4.8 1.3 1.3L15.1 9.3l6.4-.9.3 1.8-6.4.9 5.8 2.9-.9 1.7-5.8-2.9 3.4 5.5-1.6 1-3.4-5.5-.6 6.5-1.8-.2.6-6.5-4.7 4.5-1.3-1.3 4.7-4.5-6.4 1.3-.4-1.8 6.4-1.3-5.9-2.7.8-1.7 5.9 2.7L8 3l1.7-.8 2.3 6V1.5z"/></svg></span>
+          <span class="pl-label">AI step</span>
+          <span class="pl-sub">summarize</span>
+        </div><span class="pl-arrow">&rarr;</span>
+        <div class="pl-step">
+          <span class="pl-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M7 9l3 3-3 3M13 15h4"/></svg></span>
+          <span class="pl-label">Action</span>
+          <span class="pl-sub">send the digest</span>
+        </div></div></figure>
+
+  <!-- Lesson body ported at build time from weeks/week10.html -->
+<div class="lesson-section" id="l1">
+  <div class="section-number">Lesson 1 of 4</div>
+  <h2>Thinking in Automations</h2>
+  <p>Automations are workflows that run without you touching them. Something happens (a trigger), conditions are checked, and actions run automatically. The most powerful ones run while you're asleep.</p>
+  <div class="diagram">
+    <div class="diagram-title"> Every automation has three parts</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(124,58,237,0.12);border-color:rgba(124,58,237,0.3)"></div><div class="flow-label">Trigger</div><div class="flow-sub">"When X happens..."</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(6,182,212,0.12);border-color:rgba(6,182,212,0.3)"></div><div class="flow-label">Condition</div><div class="flow-sub">"...if Y is true..."</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3)"></div><div class="flow-label">Action</div><div class="flow-sub">"...do Z"</div></div>
+    </div>
+  </div>
+  <div class="callout callout-note">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Real examples</div>
+    <p>"When a new row appears in Airtable (trigger) → if the Status field is 'New' (condition) → send me an email summary (action)." Or: "Every Monday at 9am (trigger) → pull last week's Airtable rows → send a digest email."</p></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l2">
+  <div class="section-number">Lesson 2 of 4</div>
+  <h2>Build Automations with Make.com</h2>
+  <p>Make.com (formerly Integromat) is a visual automation builder. You drag and drop "modules" and connect them. It has pre-built connectors for hundreds of apps :: Gmail, Airtable, Slack, Notion, and more.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Create a free Make.com account</h4><p>Go to <a href="https://make.com" target="_blank" style="color:var(--gold-light)">make.com</a> → sign up → New Scenario. A "scenario" is Make's word for an automation workflow.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Add a trigger module</h4><p>Click the empty circle → Search for "Airtable" → choose "Watch Records." Connect your Airtable account and select your base and table.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Add an action module</h4><p>Click the + button after your trigger → search "Gmail" → choose "Send an Email." Fill in the recipient, subject, and body :: using data from your trigger.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Turn it on and test it</h4><p>Click Run Once to test. Add a row to Airtable. Watch Make process it. Check your email.</p></div></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l3">
+  <div class="section-number">Lesson 3 of 4</div>
+  <h2>Webhooks: How Apps Talk in Real Time</h2>
+  <p>A webhook is a URL that you give to one app so it can notify another app the instant something happens :: no polling, no waiting. "Call this URL when a payment goes through." The other app receives the call and reacts immediately.</p>
+  <div class="diagram">
+    <div class="diagram-title"> Webhook flow</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(6,182,212,0.12);border-color:rgba(6,182,212,0.3)"></div><div class="flow-label">App A</div><div class="flow-sub">Something happens</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(124,58,237,0.12);border-color:rgba(124,58,237,0.3)"></div><div class="flow-label">HTTP POST</div><div class="flow-sub">Sends data to URL</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3)"></div><div class="flow-label">Make.com</div><div class="flow-sub">Receives &amp; reacts</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.3)"></div><div class="flow-label">Action Fires</div><div class="flow-sub">Instantly</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l4">
+  <div class="section-number">Lesson 4 of 4</div>
+  <h2>Adding AI Steps to Automations</h2>
+  <p>Make.com has a Claude/OpenAI module. You can add an AI step to any automation: summarize the incoming data, classify it, draft a reply, generate content. This is where automations get seriously powerful.</p>
+  <div class="callout callout-tip">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Example: AI-enhanced email digest</div>
+    <p>Trigger: every Monday 9am → Get last week's Airtable rows → Send all rows to Claude with prompt "Summarize these submissions in 5 bullet points, highlight any urgent ones" → Send Claude's summary as an email. You built an AI assistant for yourself.</p></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="project">
+  <div class="section-number"> Section 10 Project</div>
+  <h2>Automated Email Digest Pipeline</h2>
+  <div class="exercise">
+    <div class="exercise-label">Build This</div>
+    <h3>A Make.com automation that collects form data and emails you a daily summary</h3>
+    <ul>
+      <li>Submissions from your Section 9 form save to <strong>Airtable</strong></li>
+      <li>Make.com scenario runs <strong>every 24 hours</strong></li>
+      <li>Pulls all new Airtable rows from the last day</li>
+      <li>Sends the data through <strong>Claude AI</strong> to generate a summary</li>
+      <li>Emails you the <strong>AI-written summary</strong></li>
+    </ul>
+  </div>
+</div>
+
+
+  <div class="finish">
+    <button class="btn red" data-complete="section-10">Mark section complete</button>
+    <div class="pager">
+        <a class="btn ghost" href="section-09.html">&larr; Section 09</a>
+        <a class="btn ghost" href="section-11.html">Section 11 &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 MØNTAN1 Academy :: Free forever</span>
+    <span>Drawn: B0SEPHUS G. ALTAMONT :: Checked: MERCER LANG</span>
+    <a href="https://m0ntan1.com">m0ntan1.com</a>
+  </footer>
+</div>
+
+<script src="../assets/academy.js"></script>
+</body>
+</html>

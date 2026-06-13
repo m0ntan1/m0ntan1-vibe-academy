@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 01 :: How the Internet Actually Works :: MØNTAN1 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/academy.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="../index.html">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></a>
+    <nav>
+      <a href="../index.html">Curriculum</a>
+      <a href="../setup.html">Setup</a>
+    </nav>
+    <a class="cta" href="https://m0ntan1.com">MØNTAN1</a>
+  </header>
+
+  <section class="lesson-head">
+    <div class="eyebrow">[ SECTION 01 :: PART I :: FOUNDATIONS ]</div>
+    <h1>How the Internet Actually Works<span class="red">.</span></h1>
+    <p class="intro">Forget everything intimidating you have heard about web development. By the end of this section you will have written real code, pushed it to GitHub, and understood exactly what happens when someone visits a website.</p>
+    <div class="lesson-meta">
+      <span><b>Time</b> ~45 min</span>
+      <span><b>Tools</b> Browser, DevTools, GitHub</span>
+      <span><b>Cost</b> $0</span>
+    </div>
+  </section>
+
+  <div class="tool-rail reveal">
+    <span class="tr-label">Tools</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 8h18"/><circle cx="6" cy="6" r=".6" fill="currentColor"/><circle cx="8.4" cy="6" r=".6" fill="currentColor"/></svg></span>Browser</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></span>GitHub</span>
+  </div>
+
+  <div class="objectives reveal">
+    <h3>You will learn</h3>
+    <ul>
+      <li>Trace a URL from keyboard to rendered page</li>
+      <li>Read and write basic HTML structure</li>
+      <li>Inspect any website with DevTools</li>
+      <li>Ask Claude for code and read what comes back</li>
+      <li>Make your first git commit</li>
+    </ul>
+  </div>
+
+  <figure class="mock reveal"><div class="mk-bar"><span class="wd"></span><span class="wd"></span><span class="wd"></span><span class="mk-url">https://yourname.com/about</span></div><div class="mk-body ">
+      <div class="hello-page">
+        <h3>About Me</h3>
+        <p>Hi, I'm building things on the internet.</p>
+        <span class="hello-tag">&lt;h1&gt; &lt;p&gt; &lt;a&gt;</span>
+      </div></div></figure>
+
+  <!-- Lesson body ported at build time from weeks/week1.html -->
+<div class="lesson-section" id="l1">
+  <div class="section-number">Lesson 1 of 4</div>
+  <h2>What Happens When You Type a URL</h2>
+  <p>Every website visit triggers an invisible sequence of events in under a second. Let's slow it down.</p>
+  <div class="diagram">
+    <div class="diagram-title"> The URL Journey :: keyboard to screen</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.3)">⌨</div><div class="flow-label">You type a URL</div><div class="flow-sub">e.g. wvgov.org</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(37,99,168,0.12);border-color:rgba(37,99,168,0.3)"></div><div class="flow-label">DNS Lookup</div><div class="flow-sub">Finds the address</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(58,124,165,0.12);border-color:rgba(58,124,165,0.3)"></div><div class="flow-label">Server</div><div class="flow-sub">Sends files back</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(45,158,107,0.12);border-color:rgba(45,158,107,0.3)"></div><div class="flow-label">Browser Builds</div><div class="flow-sub">Reads HTML/CSS/JS</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.3)"></div><div class="flow-label">You See It</div><div class="flow-sub">The webpage!</div></div>
+    </div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>A URL is just an address for a file</h4><p>Like a street address, but for data living on a computer somewhere in the world.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>DNS translates the name to a number</h4><p>Computers use IP addresses like <code>142.250.80.46</code>. DNS is a massive phone book that translates <code>google.com</code> to that number instantly.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>A server sends back three types of files</h4><p>HTML (structure), CSS (style), JavaScript (behavior). Your browser reads all three and draws the page you see.</p></div></div>
+  </div><div class="wv-example">
+  <div class="wv-example-label"> WV Real-World Example :: Small Business</div>
+  <p>When a customer in Beckley searches 'pizza near me', that search hits Google's DNS, resolves to a server, and returns HTML. If your WV pizzeria's site loads fast and is built right, you show up. This curriculum teaches you how to build that site.</p>
+</div>
+</div>
+
+<div class="lesson-section" id="l2">
+  <div class="section-number">Lesson 2 of 4</div>
+  <h2>HTML: The Skeleton of Every Page</h2>
+  <p>HTML labels text so the browser knows what each piece is :: heading, paragraph, image, link. Every website on earth is built on it.</p>
+  <div class="diagram">
+    <div class="diagram-title"> HTML Structure :: nested boxes</div>
+    <div class="html-tree">
+      <div class="tree-node"><span class="tree-tag tag-html"> &lt;html&gt;</span><span class="tag-desc">The whole page</span></div>
+      <div class="tree-node"><div class="tree-indent"></div><span class="tree-tag tag-head"> &lt;head&gt;</span><span class="tag-desc">Invisible info :: title, fonts</span></div>
+      <div class="tree-node"><div class="tree-indent"></div><span class="tree-tag tag-body"> &lt;body&gt;</span><span class="tag-desc">Everything the user sees</span></div>
+      <div class="tree-node" style="margin-left:22px"><div class="tree-indent"></div><div class="tree-indent"></div><span class="tree-tag tag-elem"> &lt;h1&gt;</span><span class="tag-desc">Big heading</span></div>
+      <div class="tree-node" style="margin-left:22px"><div class="tree-indent"></div><div class="tree-indent"></div><span class="tree-tag tag-elem"> &lt;p&gt;</span><span class="tag-desc">Paragraph</span></div>
+      <div class="tree-node" style="margin-left:22px"><div class="tree-indent"></div><div class="tree-indent"></div><span class="tree-tag tag-elem"> &lt;a&gt;</span><span class="tag-desc">Clickable link</span></div>
+    </div>
+  </div>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">index.html</span></div>
+    <pre><span class="tc">&lt;!DOCTYPE html&gt;</span>
+<span class="tc">&lt;html&gt;</span>
+  <span class="tc">&lt;head&gt;</span>
+    <span class="tc">&lt;title&gt;</span><span class="tx">My WV Page</span><span class="tc">&lt;/title&gt;</span>
+  <span class="tc">&lt;/head&gt;</span>
+  <span class="tc">&lt;body&gt;</span>
+    <span class="tc">&lt;h1&gt;</span><span class="tx">Hello from West Virginia!</span><span class="tc">&lt;/h1&gt;</span>
+    <span class="tc">&lt;p&gt;</span><span class="tx">Built with code, right here in the Mountain State.</span><span class="tc">&lt;/p&gt;</span>
+  <span class="tc">&lt;/body&gt;</span>
+<span class="tc">&lt;/html&gt;</span></pre>
+  </div>
+  <div class="try-it">
+    <div class="try-it-badge">Try It Now</div>
+    <h3>Your first HTML file in VS Code</h3>
+    <ol>
+      <li>Open VS Code → open your <strong>montani-vibe-projects</strong> folder</li>
+      <li>Create a new folder called <strong>week1</strong>, then a file called <strong>index.html</strong></li>
+      <li>Copy the code above, change the text to something about you</li>
+      <li>Right-click the file → <strong>Open with Live Server</strong></li>
+      <li>Switch to GitHub Desktop → write a commit message → commit → push</li>
+    </ol>
+  </div>
+</div>
+
+<div class="lesson-section" id="l3">
+  <div class="section-number">Lesson 3 of 4</div>
+  <h2>DevTools: Peek Inside Any Website</h2>
+  <p>Every browser has a built-in tool that lets you see the HTML and CSS behind any website. Right-click → Inspect, or press <code>F12</code>. This is how developers learn :: by looking at things that already exist.</p>
+  <div class="callout callout-tool">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Claude + DevTools combo</div>
+    <p>See something cool on a WV business site? Open DevTools, copy the HTML, paste into Claude and ask "Explain what this does." Instant free lesson from any site.</p></div>
+  </div>
+  <div class="devtools-mock">
+    <div class="devtools-tabs"><div class="devtools-tab active">Elements</div><div class="devtools-tab">Console</div><div class="devtools-tab">Network</div></div>
+    <div class="devtools-content">
+      <span style="color:var(--blue-light)">&lt;body&gt;</span><br>
+      &nbsp;&nbsp;<span style="color:var(--blue-light)">&lt;h1 </span><span style="color:var(--gold-light)">class</span>=<span style="color:#86efac">"hero"</span><span style="color:var(--blue-light)">&gt;</span><span style="color:var(--text)">Hello from WV</span><span style="color:var(--blue-light)">&lt;/h1&gt;</span>&nbsp;<span style="color:#2a3347">◄ hover to highlight on page</span>
+    </div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l4">
+  <div class="section-number">Lesson 4 of 4</div>
+  <h2>Claude as Your Co-Pilot</h2>
+  <p>The vibe developer workflow: describe what you want → Claude writes the code → you review, test, and direct. You don't memorize syntax. You describe outcomes.</p>
+  <div class="prompt-box"><p>Write me a simple HTML "about me" page. Include:
+- A heading with my name: [YOUR NAME]  
+- A short bio: [2 sentences about you]
+- An unordered list of 3 hobbies
+- Where I'm from in West Virginia: [your town/county]
+Add a comment above each section explaining what it does. I'm a beginner.</p></div>
+</div>
+
+<div class="lesson-section" id="github-commit">
+  <div class="section-number">GitHub :: Do This Now</div>
+  <h2>Make Your First Commit</h2>
+  <p>You wrote your first HTML file. Before anything else :: save it to GitHub. This is the habit that defines professional developers. Start it today.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Make sure your file is in the montani-vibe-projects folder</h4><p>Save <code>index.html</code> inside a <code>week1/</code> subfolder inside your repo folder.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Open GitHub Desktop :: your file appears under Changes</h4><p>GitHub Desktop watches your folder constantly. New or modified files appear automatically in green or yellow.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Write a commit message and click "Commit to main"</h4><p>Try: <strong>"Add Section 1 about me page HTML"</strong>. Click Commit. This takes a permanent snapshot.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Click "Push origin"</h4><p>Your file is now live at github.com/yourname/montani-vibe-projects. That's your first public code.</p></div></div>
+  </div>
+  <div class="callout callout-wv">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Your public profile starts now</div>
+    <p>Every commit you push fills in a square on your GitHub activity graph. By Section 12 that graph tells a story :: a West Virginian who showed up and built things, week after week. That story is worth more than a résumé.</p></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="project">
+  <div class="section-number"> Section 1 Project</div>
+  <h2>Your First Webpage :: About You</h2>
+  <div class="exercise">
+    <div class="exercise-label">Build This</div>
+    <h3>A personal "About Me" page :: and push it to GitHub</h3>
+    <ul>
+      <li><strong>A heading</strong> with your name</li>
+      <li><strong>A bio paragraph</strong> mentioning where in WV you're from</li>
+      <li><strong>A list</strong> of things you like or care about</li>
+      <li><strong>One link</strong> to something you love</li>
+      <li><strong>Committed to GitHub</strong> with a descriptive message</li>
+    </ul>
+  </div>
+  <div class="prompt-box"><p>Build me a complete, valid HTML "About Me" page for someone from [your town], West Virginia.
+Name: [YOUR NAME] · Bio: [YOUR BIO] · Hobbies: [3 things]
+Add HTML comments above each section. I'm a beginner learning to code.</p></div>
+</div>
+
+
+
+  <div class="finish">
+    <button class="btn red" data-complete="section-01">Mark section complete</button>
+    <div class="pager">
+        <a class="btn ghost" href="../setup.html">&larr; Setup</a>
+        <a class="btn ghost" href="section-02.html">Section 02 &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 MØNTAN1 Academy :: Free forever</span>
+    <span>Drawn: B0SEPHUS G. ALTAMONT :: Checked: MERCER LANG</span>
+    <a href="https://m0ntan1.com">m0ntan1.com</a>
+  </footer>
+</div>
+
+<script src="../assets/academy.js"></script>
+</body>
+</html>

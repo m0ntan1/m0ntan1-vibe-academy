@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 03 :: JavaScript Without the Pain :: MØNTAN1 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/academy.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="../index.html">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></a>
+    <nav>
+      <a href="../index.html">Curriculum</a>
+      <a href="../setup.html">Setup</a>
+    </nav>
+    <a class="cta" href="https://m0ntan1.com">MØNTAN1</a>
+  </header>
+
+  <section class="lesson-head">
+    <div class="eyebrow">[ SECTION 03 :: PART I :: FOUNDATIONS ]</div>
+    <h1>JavaScript Without the Pain<span class="red">.</span></h1>
+    <p class="intro">JavaScript is what makes pages do things. Skip the textbook and go straight to clicks, events, and the debugging loop that makes the language learnable.</p>
+    <div class="lesson-meta">
+      <span><b>Time</b> ~60 min</span>
+      <span><b>Tools</b> VS Code, Claude, DevTools</span>
+      <span><b>Cost</b> $0</span>
+    </div>
+  </section>
+
+  <div class="tool-rail reveal">
+    <span class="tr-label">Tools</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.4 2.1 9.9 9.3 5.3 5.8l-1.7.8 3.9 5.4-3.9 5.4 1.7.8 4.6-3.5 7.5 7.2 3-1.5V3.6l-3-1.5zm.1 4.6v10.6l-5.6-5.3 5.6-5.3z"/></svg></span>VS Code</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5 13.9 8l4.7-4.8 1.3 1.3L15.1 9.3l6.4-.9.3 1.8-6.4.9 5.8 2.9-.9 1.7-5.8-2.9 3.4 5.5-1.6 1-3.4-5.5-.6 6.5-1.8-.2.6-6.5-4.7 4.5-1.3-1.3 4.7-4.5-6.4 1.3-.4-1.8 6.4-1.3-5.9-2.7.8-1.7 5.9 2.7L8 3l1.7-.8 2.3 6V1.5z"/></svg></span>Claude</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 8h18"/><circle cx="6" cy="6" r=".6" fill="currentColor"/><circle cx="8.4" cy="6" r=".6" fill="currentColor"/></svg></span>Browser</span>
+  </div>
+
+  <div class="objectives reveal">
+    <h3>You will learn</h3>
+    <ul>
+      <li>Know what JavaScript is for and where it runs</li>
+      <li>Wire click events to real behavior</li>
+      <li>Show and hide content on demand</li>
+      <li>Debug errors with Claude instead of despair</li>
+    </ul>
+  </div>
+
+  <figure class="mock reveal"><div class="mk-bar"><span class="wd"></span><span class="wd"></span><span class="wd"></span><span class="mk-url">quiz.html</span></div><div class="mk-body ">
+      <div class="click-demo">
+        <button class="cd-btn">Reveal answer</button>
+        <div class="cd-panel">JavaScript listens for the click, then shows this.</div>
+        <code class="cd-code">btn.addEventListener('click', show)</code>
+      </div></div></figure>
+
+  <!-- Lesson body ported at build time from weeks/week3.html -->
+<div class="lesson-section" id="l1">
+  <div class="section-number">Lesson 1 of 4</div>
+  <h2>What JavaScript Is For</h2>
+  <p>HTML = structure. CSS = style. JavaScript = <strong>behavior</strong>. It's the code that runs when you click a button, submit a form, or see a notification pop up. If the page does something in response to what you do :: that's JavaScript.</p>
+  <div class="diagram">
+    <div class="diagram-title"> The three layers of every webpage</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(6,182,212,0.12);border-color:rgba(6,182,212,0.3)"></div><div class="flow-label">HTML</div><div class="flow-sub">Structure &amp; content</div></div>
+      <div class="flow-arrow">+</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(124,58,237,0.12);border-color:rgba(124,58,237,0.3)"></div><div class="flow-label">CSS</div><div class="flow-sub">Visual style</div></div>
+      <div class="flow-arrow">+</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.3)"></div><div class="flow-label">JavaScript</div><div class="flow-sub">Behavior &amp; interaction</div></div>
+      <div class="flow-arrow">=</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3)"></div><div class="flow-label">Real App</div><div class="flow-sub">Everything together</div></div>
+    </div>
+  </div>
+  <div class="callout callout-note">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">The mental model</div>
+    <p>JavaScript can read and change anything on the page. It watches for events (clicks, typing, scrolling), runs code when they happen, and updates what you see. That's the entire model.</p></div>
+  </div>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">script.js</span></div>
+    <pre><span class="cm">// Find a button and watch for clicks</span>
+<span class="tc">document</span>.<span class="at">getElementById</span>(<span class="st">'myButton'</span>).<span class="at">addEventListener</span>(<span class="st">'click'</span>, <span class="kw">function</span>() {
+  <span class="cm">// This runs when the button is clicked</span>
+  <span class="tc">alert</span>(<span class="st">'You clicked it!'</span>);
+});</pre>
+  </div>
+</div>
+
+<div class="lesson-section" id="l2">
+  <div class="section-number">Lesson 2 of 4</div>
+  <h2>Click Events: Make Things Do Stuff</h2>
+  <p>An "event" is anything the user does :: click, type, hover, scroll. JavaScript can listen for any event and run code when it happens. The most common: <code>click</code>.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Give your HTML element an ID</h4><p>IDs are like name tags. <code>&lt;button id="myBtn"&gt;Click me&lt;/button&gt;</code>. The ID is how JavaScript finds the element.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Use JavaScript to find it and add a listener</h4><p><code>document.getElementById('myBtn')</code> finds your button. <code>.addEventListener('click', function() {...})</code> watches it for clicks.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Write what happens inside the function</h4><p>Anything between the curly braces <code>{ }</code> runs when the event fires. Change text, show/hide things, update a counter :: anything.</p></div></div>
+  </div>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">index.html + script.js</span></div>
+    <pre><span class="cm">&lt;!-- HTML --&gt;</span>
+<span class="tc">&lt;button</span> <span class="at">id</span>=<span class="vl">"scoreBtn"</span><span class="tc">&gt;</span><span class="tx">Add Point</span><span class="tc">&lt;/button&gt;</span>
+<span class="tc">&lt;p</span> <span class="at">id</span>=<span class="vl">"score"</span><span class="tc">&gt;</span><span class="tx">Score: 0</span><span class="tc">&lt;/p&gt;</span>
+
+<span class="cm">/* JavaScript */</span>
+<span class="kw">let</span> <span class="tx">count</span> = <span class="vl">0</span>;
+
+<span class="tc">document</span>.<span class="at">getElementById</span>(<span class="st">'scoreBtn'</span>).<span class="at">addEventListener</span>(<span class="st">'click'</span>, <span class="kw">function</span>() {
+  count = count + <span class="vl">1</span>;
+  <span class="tc">document</span>.<span class="at">getElementById</span>(<span class="st">'score'</span>).<span class="at">textContent</span> = <span class="st">'Score: '</span> + count;
+});</pre>
+  </div>
+  <div class="callout callout-tool">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Ask Claude to explain any JS line</div>
+    <p>Paste any JavaScript line into Claude and ask "Explain this to me like I'm a beginner." This is the fastest way to build your JavaScript vocabulary. Do it constantly.</p></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l3">
+  <div class="section-number">Lesson 3 of 4</div>
+  <h2>Show and Hide Content</h2>
+  <p>One of the most common things JavaScript does: showing or hiding parts of a page based on what you click. This is the foundation of tabs, accordions, modals, and menus.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">toggle.js</span></div>
+    <pre><span class="cm">// Show/hide a section when button is clicked</span>
+<span class="tc">document</span>.<span class="at">getElementById</span>(<span class="st">'toggleBtn'</span>).<span class="at">addEventListener</span>(<span class="st">'click'</span>, <span class="kw">function</span>() {
+  <span class="kw">const</span> <span class="tx">section</span> = <span class="tc">document</span>.<span class="at">getElementById</span>(<span class="st">'hiddenSection'</span>);
+
+  <span class="kw">if</span> (<span class="tx">section</span>.<span class="at">style</span>.<span class="at">display</span> === <span class="st">'none'</span>) {
+    <span class="tx">section</span>.<span class="at">style</span>.<span class="at">display</span> = <span class="st">'block'</span>;  <span class="cm">// show it</span>
+  } <span class="kw">else</span> {
+    <span class="tx">section</span>.<span class="at">style</span>.<span class="at">display</span> = <span class="st">'none'</span>;   <span class="cm">// hide it</span>
+  }
+});</pre>
+  </div>
+  <div class="callout callout-tip">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Don't stress about syntax yet</div>
+    <p>The goal this section isn't to memorize JavaScript. It's to understand the pattern: <em>find element → listen for event → run code that changes something</em>. Claude handles the syntax. You handle the logic.</p></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l4">
+  <div class="section-number">Lesson 4 of 4</div>
+  <h2>Debugging with Claude</h2>
+  <p>Code breaks. Always. The skill isn't avoiding errors :: it's knowing how to find and fix them fast. Your two debugging tools: the browser Console and Claude.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Open the Console (in DevTools)</h4><p>Right-click → Inspect → Console tab. This shows JavaScript errors in red. Every error message tells you which file, which line, and what went wrong.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Copy the error message exactly</h4><p>Don't try to interpret it yourself yet. Copy the red error text.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Paste it to Claude with your code</h4><p>Claude will tell you exactly what's wrong and show you the fix. Do this every time.</p></div></div>
+  </div>
+  <div class="prompt-box">
+    <p>My JavaScript isn't working. Here's the error from the Console:
+[paste the red error message]
+
+Here's my full code:
+[paste HTML and JS]
+
+What's wrong and how do I fix it?</p>
+  </div>
+</div>
+
+<div class="lesson-section" id="project">
+  <div class="section-number"> Section 3 Project</div>
+  <h2>Interactive Quiz Page</h2>
+  <div class="exercise">
+    <div class="exercise-label">Build This</div>
+    <h3>A click-through quiz with score tracking</h3>
+    <p>Put JavaScript into practice by building a simple trivia quiz. Use Claude to generate the logic, then customize the questions.</p>
+    <ul>
+      <li><strong>3 :: 5 questions</strong> on any topic you like</li>
+      <li><strong>Multiple choice buttons</strong> for each answer</li>
+      <li><strong>Right/wrong feedback</strong> shown after each click</li>
+      <li><strong>A score counter</strong> that tracks how many you got right</li>
+      <li><strong>A "restart" button</strong> at the end</li>
+    </ul>
+  </div>
+  <div class="prompt-box">
+    <p>Build me a JavaScript quiz page about [your topic].
+5 multiple choice questions, 4 options each.
+When I click an answer: highlight it green if correct, red if wrong.
+Show my running score at the top.
+At the end, show my total score and a Restart button.
+Keep the code clean and commented :: I'm a beginner learning JS.</p>
+  </div>
+</div>
+
+
+  <div class="finish">
+    <button class="btn red" data-complete="section-03">Mark section complete</button>
+    <div class="pager">
+        <a class="btn ghost" href="section-02.html">&larr; Section 02</a>
+        <a class="btn ghost" href="section-04.html">Section 04 &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 MØNTAN1 Academy :: Free forever</span>
+    <span>Drawn: B0SEPHUS G. ALTAMONT :: Checked: MERCER LANG</span>
+    <a href="https://m0ntan1.com">m0ntan1.com</a>
+  </footer>
+</div>
+
+<script src="../assets/academy.js"></script>
+</body>
+</html>

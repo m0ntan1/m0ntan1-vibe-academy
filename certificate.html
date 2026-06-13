@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MØNTAN1 Academy :: Certificate of Completion</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  /* Issuer tool: open with ?name=Jane%20Doe&date=2026-06-14 (or use the bar
+     below), then print to PDF. Letter landscape. */
+  :root {
+    --paper: #f2efe8;
+    --ink: #0a0a0a;
+    --dim: #6e6a60;
+    --hair: #d4d0c5;
+    --red: #e00000;
+    --teal: #4B737A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #d8d4c8;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* issuer controls, never printed */
+  .controls {
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    padding: 14px 20px;
+    background: var(--ink); color: var(--paper);
+    font-size: 12px;
+  }
+  .controls label { letter-spacing: .12em; text-transform: uppercase; font-size: 10px; }
+  .controls input {
+    font-family: inherit; font-size: 13px;
+    padding: 8px 12px; border: 1px solid #444; background: #111; color: var(--paper);
+    min-width: 240px;
+  }
+  .controls button {
+    font-family: inherit; font-size: 11px; font-weight: 600;
+    letter-spacing: .18em; text-transform: uppercase;
+    background: var(--red); color: #fff; border: none; cursor: pointer;
+    padding: 10px 20px;
+  }
+  .controls button:hover { background: var(--paper); color: var(--ink); }
+
+  .sheet {
+    width: 11in; height: 8.5in;
+    margin: 24px auto;
+    background: var(--paper);
+    padding: 0.55in;
+    box-shadow: 0 12px 40px rgba(0,0,0,.25);
+    position: relative;
+  }
+  .frame {
+    height: 100%;
+    border: 3px solid var(--ink);
+    outline: 1px solid var(--ink);
+    outline-offset: 6px;
+    padding: 0.5in 0.65in 0.45in;
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* faint glyph grain, same dialect as the site */
+  .grain {
+    position: absolute; inset: 0;
+    font: 400 11px/2 'IBM Plex Mono', monospace;
+    letter-spacing: .2em;
+    color: #e4dfd1;
+    white-space: pre;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .frame > *:not(.grain) { position: relative; z-index: 1; }
+
+  .masthead { display: flex; justify-content: space-between; align-items: baseline; }
+  .mark { font-size: 24px; font-weight: 700; letter-spacing: .2em; }
+  .mark .o { color: var(--red); }
+  .mark small { font-weight: 400; font-size: 12px; letter-spacing: .26em; color: var(--dim); margin-left: 12px; }
+  .doc-no { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--dim); }
+  .doc-no b { color: var(--red); font-weight: 400; }
+
+  .title {
+    margin-top: 0.42in;
+    font-size: 13px; letter-spacing: .5em; text-transform: uppercase; color: var(--teal);
+  }
+  .certifies { margin-top: 0.28in; font-size: 13px; color: var(--dim); }
+  .name {
+    margin-top: 0.12in;
+    font-size: 52px; font-weight: 700;
+    letter-spacing: .01em;
+    line-height: 1.05;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.12in;
+    min-height: 1.2em;
+  }
+  .body-line { margin-top: 0.22in; font-size: 14px; line-height: 1.8; color: var(--ink); max-width: 8.2in; }
+  .body-line b { color: var(--red); font-weight: 700; }
+  .meta-row {
+    margin-top: 0.18in;
+    display: flex; gap: 0.6in;
+    font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim);
+  }
+  .meta-row b { color: var(--ink); font-weight: 600; display: block; margin-top: 4px; letter-spacing: .12em; }
+
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; }
+  .sig { width: 2.9in; }
+  .sig .line { border-top: 1.5px solid var(--ink); padding-top: 8px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+  .sig .nm { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--ink); margin-bottom: 6px; font-style: italic; }
+
+  .seal {
+    width: 1.55in; height: 1.55in;
+    border: 2.5px solid var(--red);
+    border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--red);
+    text-align: center;
+    transform: rotate(-8deg);
+  }
+  .seal .big { font-size: 44px; font-weight: 700; line-height: 1; }
+  .seal .sm { font-size: 7.5px; letter-spacing: .3em; text-transform: uppercase; margin-top: 6px; }
+  .seal .sm2 { font-size: 7px; letter-spacing: .22em; text-transform: uppercase; opacity: .85; }
+
+  @media print {
+    body { background: var(--paper); }
+    .controls { display: none; }
+    .sheet { margin: 0; box-shadow: none; width: 100%; height: 100vh; }
+  }
+  @page { size: letter landscape; margin: 0; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <label>Name</label>
+  <input type="text" id="c-name" placeholder="Recipient name">
+  <label>Date</label>
+  <input type="text" id="c-date" placeholder="June 14, 2026">
+  <button onclick="apply()">Apply</button>
+  <button onclick="window.print()">Print / PDF</button>
+</div>
+
+<div class="sheet">
+  <div class="frame">
+    <pre class="grain" id="grain" aria-hidden="true"></pre>
+
+    <div class="masthead">
+      <div class="mark">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></div>
+      <div class="doc-no"><b>M1A-CERT</b> :: Morgantown, West Virginia</div>
+    </div>
+
+    <div class="title">Certificate of Completion</div>
+    <div class="certifies">This certifies that</div>
+    <div class="name" id="name">&nbsp;</div>
+
+    <p class="body-line">
+      has completed the MØNTAN1 Academy builder's primer: <b>twelve sections, zero to one</b>,
+      from the first line of HTML to a shipped, AI-powered product, live on the open internet.
+      Educate. Disintermediate. Innovate. Build.
+    </p>
+
+    <div class="meta-row">
+      <span>Date of completion<b id="date">&nbsp;</b></span>
+      <span>Curriculum<b>12 sections + setup :: all builds shipped</b></span>
+      <span>Tuition<b>$0 :: free forever</b></span>
+    </div>
+
+    <div class="foot">
+      <div class="sig">
+        <div class="nm">B0SEPHUS G. ALTAMONT</div>
+        <div class="line">Drawn :: Managing Director</div>
+      </div>
+      <div class="seal">
+        <div class="big">Ø&rarr;1</div>
+        <div class="sm">MØNTAN1 Academy</div>
+        <div class="sm2">Off zero :: in a weekend</div>
+      </div>
+      <div class="sig">
+        <div class="nm">MERCER LANG</div>
+        <div class="line">Checked :: Compliance &amp; Audit</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const nameEl = document.getElementById('name');
+  const dateEl = document.getElementById('date');
+  const nIn = document.getElementById('c-name');
+  const dIn = document.getElementById('c-date');
+
+  function fmtToday() {
+    return new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+  function setCert(n, d) {
+    nameEl.textContent = n || ' ';
+    dateEl.textContent = d || fmtToday();
+    document.title = 'M0NTAN1 Academy Certificate :: ' + (n || 'unnamed');
+  }
+  function apply() { setCert(nIn.value.trim(), dIn.value.trim()); }
+
+  nIn.value = params.get('name') || '';
+  dIn.value = params.get('date') || '';
+  setCert(nIn.value, dIn.value);
+
+  // grain, same seed discipline as the site
+  (function () {
+    let s = 91;
+    const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
+    const G = '·.:;~-=+';
+    let out = '';
+    for (let r = 0; r < 40; r++) {
+      let row = '';
+      for (let x = 0; x < 120; x++) {
+        row += rnd() < 0.05 ? G[Math.floor(rnd() * G.length)] : ' ';
+      }
+      out += row + '\n';
+    }
+    document.getElementById('grain').textContent = out;
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 06 :: Landing Pages That Convert :: MØNTAN1 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/academy.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="../index.html">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></a>
+    <nav>
+      <a href="../index.html">Curriculum</a>
+      <a href="../setup.html">Setup</a>
+    </nav>
+    <a class="cta" href="https://m0ntan1.com">MØNTAN1</a>
+  </header>
+
+  <section class="lesson-head">
+    <div class="eyebrow">[ SECTION 06 :: PART II :: BUILD THINGS ]</div>
+    <h1>Landing Pages That Convert<span class="red">.</span></h1>
+    <p class="intro">A landing page is a single argument made in one screen. Learn the anatomy, write the copy with AI, and measure whether it works.</p>
+    <div class="lesson-meta">
+      <span><b>Time</b> ~60 min</span>
+      <span><b>Tools</b> VS Code, Claude, Netlify</span>
+      <span><b>Cost</b> $0</span>
+    </div>
+  </section>
+
+  <div class="tool-rail reveal">
+    <span class="tr-label">Tools</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.4 2.1 9.9 9.3 5.3 5.8l-1.7.8 3.9 5.4-3.9 5.4 1.7.8 4.6-3.5 7.5 7.2 3-1.5V3.6l-3-1.5zm.1 4.6v10.6l-5.6-5.3 5.6-5.3z"/></svg></span>VS Code</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5 13.9 8l4.7-4.8 1.3 1.3L15.1 9.3l6.4-.9.3 1.8-6.4.9 5.8 2.9-.9 1.7-5.8-2.9 3.4 5.5-1.6 1-3.4-5.5-.6 6.5-1.8-.2.6-6.5-4.7 4.5-1.3-1.3 4.7-4.5-6.4 1.3-.4-1.8 6.4-1.3-5.9-2.7.8-1.7 5.9 2.7L8 3l1.7-.8 2.3 6V1.5z"/></svg></span>Claude</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2 21.8 12 12 21.8 2.2 12 12 2.2zm0 3.6L7.6 10v4l4.4 4.2L16.4 14v-4L12 5.8zm0 3.3 2.5 2.5L12 14.1 9.5 11.6 12 9.1z"/></svg></span>Netlify</span>
+  </div>
+
+  <div class="objectives reveal">
+    <h3>You will learn</h3>
+    <ul>
+      <li>Name the parts of a landing page that does its job</li>
+      <li>Draft and tighten copy with AI assistance</li>
+      <li>Build heroes, buttons, and calls to action that earn clicks</li>
+      <li>Add basic analytics and read them honestly</li>
+    </ul>
+  </div>
+
+  <figure class="mock reveal"><div class="mk-bar"><span class="wd"></span><span class="wd"></span><span class="wd"></span><span class="mk-url">your-idea.com</span></div><div class="mk-body ">
+      <div class="wire">
+        <div class="wire-nav"><span class="wb sm"></span><span class="wire-spacer"></span><span class="wb pill"></span></div>
+        <div class="wire-hero"><span class="wb h1"></span><span class="wb h1 short"></span><span class="wb cta"></span></div>
+        <div class="wire-row"><span class="wb box"></span><span class="wb box"></span><span class="wb box"></span></div>
+      </div></div></figure>
+
+  <!-- Lesson body ported at build time from weeks/week6.html -->
+<div class="lesson-section" id="l1">
+  <div class="section-number">Lesson 1 of 4</div>
+  <h2>The Anatomy of a Great Landing Page</h2>
+  <p>A landing page has one job: get a visitor to take one specific action. Every section is designed to reduce doubt and increase desire. Here's the standard structure that converts.</p>
+  <div class="diagram">
+    <div class="diagram-title"> The 7 sections of a high-converting landing page</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.25);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px"><span style="font-size:18px"></span><div><strong style="font-size:0.9rem">Hero</strong> <span style="font-size:0.82rem;color:var(--muted)"> :: Big headline, subheadline, primary CTA button. Make the value immediately clear.</span></div></div>
+      <div style="background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px"><span style="font-size:18px"></span><div><strong style="font-size:0.9rem">Problem</strong> <span style="font-size:0.82rem;color:var(--muted)"> :: Name the pain your visitor feels. Make them feel understood.</span></div></div>
+      <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px"><span style="font-size:18px"></span><div><strong style="font-size:0.9rem">Solution</strong> <span style="font-size:0.82rem;color:var(--muted)"> :: How you/your product solves it. Benefits, not features.</span></div></div>
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px"><span style="font-size:18px"></span><div><strong style="font-size:0.9rem">Social Proof</strong> <span style="font-size:0.82rem;color:var(--muted)"> :: Testimonials, logos, numbers. Builds trust.</span></div></div>
+      <div style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px"><span style="font-size:18px"></span><div><strong style="font-size:0.9rem">Features/Pricing</strong> <span style="font-size:0.82rem;color:var(--muted)"> :: What they get. Simple, scannable.</span></div></div>
+      <div style="background:rgba(244,63,94,0.08);border:1px solid rgba(244,63,94,0.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px"><span style="font-size:18px"></span><div><strong style="font-size:0.9rem">FAQ</strong> <span style="font-size:0.82rem;color:var(--muted)"> :: Answer the 5 objections that stop people from converting.</span></div></div>
+      <div style="background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.25);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px"><span style="font-size:18px"></span><div><strong style="font-size:0.9rem">Final CTA</strong> <span style="font-size:0.82rem;color:var(--muted)"> :: One more chance to act. Restate the key benefit.</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l2">
+  <div class="section-number">Lesson 2 of 4</div>
+  <h2>AI-Assisted Copywriting</h2>
+  <p>Landing page copy is an art :: short, punchy sentences that reduce friction. Claude is excellent at this when you give it the right inputs.</p>
+  <div class="prompt-box">
+    <p>Write landing page copy for [your idea]. Target audience: [describe them].
+The main thing they want: [outcome].
+The main thing they fear: [concern].
+Write:
+- 3 hero headline options (under 10 words each)
+- A 2-line subheadline
+- 3 benefit bullets (outcome-focused, not feature-focused)
+- 2 CTA button text options
+- 5 FAQ questions + answers
+Make it honest and conversational. No corporate buzzwords.</p>
+  </div>
+  <div class="callout callout-note">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Benefits vs. features</div>
+    <p>Feature: "AI-powered meal planning." Benefit: "Stop staring at the fridge wondering what to cook." Write benefits :: what the person gets, feels, or avoids. Claude will help you make this shift if you ask it to.</p></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l3">
+  <div class="section-number">Lesson 3 of 4</div>
+  <h2>Hero Sections, Buttons &amp; CTAs</h2>
+  <p>The hero is the most important real estate on the page. Let's look at the code patterns for building a compelling one, and understand why each choice matters.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">landing.html</span></div>
+    <pre><span class="tc">&lt;section</span> <span class="at">class</span>=<span class="vl">"hero"</span><span class="tc">&gt;</span>
+  <span class="tc">&lt;h1&gt;</span><span class="tx">Stop Forgetting to Water Your Plants</span><span class="tc">&lt;/h1&gt;</span>
+  <span class="tc">&lt;p&gt;</span><span class="tx">PlantPal sends you a nudge exactly when each plant needs water :: no app required.</span><span class="tc">&lt;/p&gt;</span>
+  <span class="tc">&lt;a</span> <span class="at">href</span>=<span class="vl">"#signup"</span> <span class="at">class</span>=<span class="vl">"cta-btn"</span><span class="tc">&gt;</span><span class="tx">Get Early Access :: Free</span><span class="tc">&lt;/a&gt;</span>
+  <span class="tc">&lt;p</span> <span class="at">class</span>=<span class="vl">"social-proof"</span><span class="tc">&gt;</span><span class="tx">Join 340 plant lovers on the waitlist</span><span class="tc">&lt;/p&gt;</span>
+<span class="tc">&lt;/section&gt;</span></pre>
+  </div>
+</div>
+
+<div class="lesson-section" id="l4">
+  <div class="section-number">Lesson 4 of 4</div>
+  <h2>Adding Basic Analytics</h2>
+  <p>Once your page is live, you want to know: is anyone visiting? Where are they coming from? Are they clicking your CTA? Free tools give you this data in minutes.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Create a free Plausible or Google Analytics account</h4><p>Plausible (plausible.io) is simpler and privacy-friendly. Google Analytics is more powerful. Either works :: Plausible is better for beginners.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Copy the tracking script they give you</h4><p>It's a single &lt;script&gt; tag. Paste it just before the &lt;/head&gt; tag in your HTML. That's the whole installation.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Watch live visitors appear in the dashboard</h4><p>Share your URL with a few people. Within minutes, you'll see them appear as live visitors. This is immediately addictive.</p></div></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="project">
+  <div class="section-number"> Section 6 Project</div>
+  <h2>A Landing Page for Your Idea</h2>
+  <div class="exercise">
+    <div class="exercise-label">Build This</div>
+    <h3>A complete landing page for something you actually care about</h3>
+    <p>It can be a real project, a fictional product, an event, a newsletter :: anything. Use Claude for both the copy and the code. Deploy it to Netlify and add analytics.</p>
+    <ul>
+      <li>All 7 sections from the anatomy lesson</li>
+      <li>A real CTA (email signup, waitlist form, or link)</li>
+      <li>Mobile responsive layout</li>
+      <li>Analytics tracking installed</li>
+      <li>Share the live URL and see who visits</li>
+    </ul>
+  </div>
+</div>
+
+
+  <div class="finish">
+    <button class="btn red" data-complete="section-06">Mark section complete</button>
+    <div class="pager">
+        <a class="btn ghost" href="section-05.html">&larr; Section 05</a>
+        <a class="btn ghost" href="section-07.html">Section 07 &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 MØNTAN1 Academy :: Free forever</span>
+    <span>Drawn: B0SEPHUS G. ALTAMONT :: Checked: MERCER LANG</span>
+    <a href="https://m0ntan1.com">m0ntan1.com</a>
+  </footer>
+</div>
+
+<script src="../assets/academy.js"></script>
+</body>
+</html>

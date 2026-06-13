@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 11 :: Ship a Full Product :: MØNTAN1 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/academy.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="../index.html">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></a>
+    <nav>
+      <a href="../index.html">Curriculum</a>
+      <a href="../setup.html">Setup</a>
+    </nav>
+    <a class="cta" href="https://m0ntan1.com">MØNTAN1</a>
+  </header>
+
+  <section class="lesson-head">
+    <div class="eyebrow">[ SECTION 11 :: PART III :: SHIP IT ]</div>
+    <h1>Ship a Full Product<span class="red">.</span></h1>
+    <p class="intro">The capstone. Scope something small enough to finish and real enough to matter, then take it from wireframe to tested, described, and shipped.</p>
+    <div class="lesson-meta">
+      <span><b>Time</b> ~90 min</span>
+      <span><b>Tools</b> Everything so far</span>
+      <span><b>Cost</b> $0</span>
+    </div>
+  </section>
+
+
+
+  <div class="objectives reveal">
+    <h3>You will learn</h3>
+    <ul>
+      <li>Scope a capstone you can actually finish</li>
+      <li>Wireframe before building</li>
+      <li>Test before sharing</li>
+      <li>Write a product description that sells the work</li>
+    </ul>
+  </div>
+
+  <div class="scope reveal">
+      <div class="sc-step"><span class="sc-n">1</span><span>Scope it small</span></div>
+      <div class="sc-arrow">&rarr;</div>
+      <div class="sc-step"><span class="sc-n">2</span><span>Wireframe</span></div>
+      <div class="sc-arrow">&rarr;</div>
+      <div class="sc-step"><span class="sc-n">3</span><span>Build</span></div>
+      <div class="sc-arrow">&rarr;</div>
+      <div class="sc-step"><span class="sc-n">4</span><span>Test</span></div>
+      <div class="sc-arrow">&rarr;</div>
+      <div class="sc-step sc-ship"><span class="sc-n">5</span><span>Ship</span></div>
+    </div>
+
+  <!-- Lesson body ported at build time from weeks/week11.html -->
+<div class="lesson-section" id="l1">
+  <div class="section-number">Lesson 1 of 4</div>
+  <h2>Scoping Your Capstone Product</h2>
+  <p>this section you build something real :: your capstone project. The most common mistake beginners make: scoping too big. A focused, finished product beats an ambitious, half-built one every time.</p>
+  <div class="callout callout-note">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">The one-page brief</div>
+    <p>Before writing a single line of code, fill out: (1) What does it do in one sentence? (2) Who is it for? (3) What's the one main action a user takes? (4) What are you NOT building? That last one is the most important.</p></div>
+  </div>
+  <div class="prompt-box">
+    <p>Help me scope a web app project. My idea: [describe it].
+Help me:
+1. Write a one-sentence description of what it does
+2. Define the one core user action
+3. List 3 features for the MVP (minimum viable version)
+4. List 3 features to cut from the MVP (save for later)
+5. Estimate if this is buildable in a week for a beginner
+Be honest if I'm scoping too big.</p>
+  </div>
+</div>
+
+<div class="lesson-section" id="l2">
+  <div class="section-number">Lesson 2 of 4</div>
+  <h2>Wireframe Before You Build</h2>
+  <p>A wireframe is a rough sketch of what your app will look like :: boxes and labels, no colors or details. Spending 30 minutes wireframing before coding saves hours of rebuilding later.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Use Whimsical (free, browser-based)</h4><p>Go to <a href="https://whimsical.com" target="_blank" style="color:var(--gold-light)">whimsical.com</a> → New → Wireframe. Drag boxes, add labels, draw arrows showing user flow.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Map each screen your user sees</h4><p>Landing/home → main app screen → result/success state. Even 3 simple boxes helps clarify what you're building.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Share the wireframe with Claude</h4><p>Screenshot your wireframe and paste it into Claude. Ask: "Based on this wireframe, what HTML structure and components should I build first?"</p></div></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l3">
+  <div class="section-number">Lesson 3 of 4</div>
+  <h2>Testing Before You Share</h2>
+  <p>Before you share anything, test it yourself :: systematically. Not just "does it work," but "what happens when someone uses it wrong?"</p>
+  <div class="check-list-static" style="display:flex;flex-direction:column;gap:8px;margin:16px 0">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:0.85rem"> Does the main feature work end-to-end?</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:0.85rem"> What if the user leaves a field empty?</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:0.85rem"> What if the API call fails?</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:0.85rem"> Does it work on mobile?</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:0.85rem"> Is the loading state handled?</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:0.85rem"> Is the success state clear to the user?</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:0.85rem"> Would a stranger understand how to use it without instructions?</div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l4">
+  <div class="section-number">Lesson 4 of 4</div>
+  <h2>Writing Your Product Description</h2>
+  <p>You built something. Now tell people about it in a way that makes them want to try it. One paragraph, written like a human, not a press release.</p>
+  <div class="prompt-box">
+    <p>Write a product description for my app: [describe it].
+Target reader: [who would use this]
+Write:
+- 1 punchy opener sentence
+- 2-3 sentences on what it does and why it's useful
+- 1 sentence on what makes it different or interesting
+Keep it under 80 words. Sound like a founder, not a marketer.</p>
+  </div>
+</div>
+
+<div class="lesson-section" id="project">
+  <div class="section-number"> Section 11 Project</div>
+  <h2>Your Capstone: An AI-Powered Mini-Product</h2>
+  <div class="exercise">
+    <div class="exercise-label">Build This</div>
+    <h3>A polished, working tool that combines what you've learned</h3>
+    <p>Use any combination of: HTML/CSS/JS, Claude API, Airtable, Make automations, Netlify/Replit. Make it genuinely useful :: even for one person (you).</p>
+    <ul>
+      <li>Scope it with the one-page brief</li>
+      <li>Wireframe before coding</li>
+      <li>Build the MVP :: cut anything non-essential</li>
+      <li>Test it against the checklist above</li>
+      <li>Write a product description</li>
+      <li>Deploy it and share the link</li>
+    </ul>
+  </div>
+</div>
+
+
+  <div class="finish">
+    <button class="btn red" data-complete="section-11">Mark section complete</button>
+    <div class="pager">
+        <a class="btn ghost" href="section-10.html">&larr; Section 10</a>
+        <a class="btn ghost" href="section-12.html">Section 12 &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 MØNTAN1 Academy :: Free forever</span>
+    <span>Drawn: B0SEPHUS G. ALTAMONT :: Checked: MERCER LANG</span>
+    <a href="https://m0ntan1.com">m0ntan1.com</a>
+  </footer>
+</div>
+
+<script src="../assets/academy.js"></script>
+</body>
+</html>

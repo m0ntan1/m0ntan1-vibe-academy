@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 08 :: Build an App with AI Features :: MØNTAN1 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/academy.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="../index.html">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></a>
+    <nav>
+      <a href="../index.html">Curriculum</a>
+      <a href="../setup.html">Setup</a>
+    </nav>
+    <a class="cta" href="https://m0ntan1.com">MØNTAN1</a>
+  </header>
+
+  <section class="lesson-head">
+    <div class="eyebrow">[ SECTION 08 :: PART II :: BUILD THINGS ]</div>
+    <h1>Build an App with AI Features<span class="red">.</span></h1>
+    <p class="intro">The section where it stops being a website and starts being a product: wire a chat interface to an AI API and give it a personality.</p>
+    <div class="lesson-meta">
+      <span><b>Time</b> ~75 min</span>
+      <span><b>Tools</b> Replit, Claude API</span>
+      <span><b>Cost</b> $0</span>
+    </div>
+  </section>
+
+  <div class="tool-rail reveal">
+    <span class="tr-label">Tools</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7z"/></svg></span>Replit</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5 13.9 8l4.7-4.8 1.3 1.3L15.1 9.3l6.4-.9.3 1.8-6.4.9 5.8 2.9-.9 1.7-5.8-2.9 3.4 5.5-1.6 1-3.4-5.5-.6 6.5-1.8-.2.6-6.5-4.7 4.5-1.3-1.3 4.7-4.5-6.4 1.3-.4-1.8 6.4-1.3-5.9-2.7.8-1.7 5.9 2.7L8 3l1.7-.8 2.3 6V1.5z"/></svg></span>Claude</span>
+  </div>
+
+  <div class="objectives reveal">
+    <h3>You will learn</h3>
+    <ul>
+      <li>Understand how AI APIs take prompts and return text</li>
+      <li>Build a working chat interface</li>
+      <li>Shape behavior with a system prompt</li>
+      <li>Keep secrets in environment variables</li>
+    </ul>
+  </div>
+
+  <figure class="mock reveal"><div class="mk-bar"><span class="wd"></span><span class="wd"></span><span class="wd"></span><span class="mk-url">your-chatbot.com</span></div><div class="mk-body ">
+      <div class="chat">
+        <div class="ch-row ch-bot"><span class="ch-who">AI</span><span class="ch-bubble">Hey, I'm shaped by a system prompt. What can I help build?</span></div>
+        <div class="ch-row ch-you"><span class="ch-bubble">Explain APIs in one line.</span><span class="ch-who">You</span></div>
+        <div class="ch-row ch-bot"><span class="ch-who">AI</span><span class="ch-bubble">A menu of things another computer will do for you.</span></div>
+        <div class="ch-input"><span class="ch-ph">Type a message...</span><span class="ch-send">Send</span></div>
+      </div></div></figure>
+
+  <!-- Lesson body ported at build time from weeks/week8.html -->
+<div class="lesson-section" id="l1">
+  <div class="section-number">Lesson 1 of 4</div>
+  <h2>How AI APIs Work</h2>
+  <p>You've been using Claude through the website. Now you're going to call Claude (or OpenAI) directly from your own code :: so your app can generate text, answer questions, and respond to users in real time.</p>
+  <div class="diagram">
+    <div class="diagram-title"> Your app talks to Claude's API</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(124,58,237,0.12);border-color:rgba(124,58,237,0.3)"></div><div class="flow-label">User types</div><div class="flow-sub">In your app</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(6,182,212,0.12);border-color:rgba(6,182,212,0.3)"></div><div class="flow-label">Your Code</div><div class="flow-sub">Sends to Claude API</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.3)"></div><div class="flow-label">Claude API</div><div class="flow-sub">Generates response</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3)"></div><div class="flow-label">Response</div><div class="flow-sub">Shown to user</div></div>
+    </div>
+  </div>
+  <div class="callout callout-tool">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Getting your Claude API key</div>
+    <p>Go to <a href="https://console.anthropic.com" target="_blank" style="color:var(--gold-light)">console.anthropic.com</a> → create account → API Keys → Create Key. Copy it somewhere safe. This is different from your claude.ai login :: it's specifically for calling Claude from code.</p></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l2">
+  <div class="section-number">Lesson 2 of 4</div>
+  <h2>Building the Chat Interface</h2>
+  <p>A chat interface is just: a text input, a send button, and a message list that updates. The AI call is just a fetch() request :: you learned this last week.</p>
+  <div class="callout callout-note">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Use Replit this section</div>
+    <p>AI API calls need to happen server-side to keep your key safe. Open <a href="https://replit.com" target="_blank" style="color:var(--gold-light)">replit.com</a> (you set this up in Setup Day) → New Repl → Node.js. This gives you a free server environment in your browser.</p></div>
+  </div>
+  <div class="prompt-box">
+    <p>Build me a chatbot app using the Anthropic Claude API in Replit (Node.js).
+My API key: [YOUR KEY :: store it as a Replit secret called ANTHROPIC_KEY]
+The chatbot should have this personality: [describe your bot :: e.g., "a sarcastic movie critic"]
+System prompt: [describe the bot's rules and personality in detail]
+Build: a clean chat UI (HTML/CSS), a Node.js server that calls the Claude API, message history so context is maintained.
+I'm a beginner :: explain each file's purpose with comments.</p>
+  </div>
+</div>
+
+<div class="lesson-section" id="l3">
+  <div class="section-number">Lesson 3 of 4</div>
+  <h2>System Prompts: Give Your AI a Personality</h2>
+  <p>A system prompt is a set of instructions you give Claude before the conversation starts. It defines the AI's role, knowledge, tone, and rules. This is what turns a generic chatbot into something unique.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">system-prompt examples</span></div>
+    <pre><span class="cm">// A cooking assistant</span>
+<span class="tx">"You are Chef Marco, an enthusiastic Italian chef. You only talk about food,
+recipes, and cooking techniques. Always suggest an Italian dish as an example.
+Keep responses under 150 words. End every message with a relevant food emoji."</span>
+
+<span class="cm">// A study buddy</span>
+<span class="tx">"You are a patient tutor helping a high school student. Ask questions back
+to check understanding rather than just giving answers. Use simple language.
+Never do homework for them :: guide them to the answer instead."</span></pre>
+  </div>
+  <div class="prompt-box">
+    <p>Write a detailed system prompt for a [type] chatbot that:
+- Has this personality: [describe]
+- Knows about: [topics]
+- Should NOT: [limitations]
+- Responds in this style: [tone/format]
+Make it specific enough that the AI has a clear, consistent character.</p>
+  </div>
+</div>
+
+<div class="lesson-section" id="l4">
+  <div class="section-number">Lesson 4 of 4</div>
+  <h2>Environment Variables: Keeping Keys Safe</h2>
+  <p>Replit has a "Secrets" feature :: environment variables that your code can read but that don't appear in your code files. This is how you keep API keys private.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>In Replit: open the Secrets panel</h4><p>Click the  padlock icon in the left sidebar. This is your encrypted secrets store.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Add your API key as a secret</h4><p>Key: <code>ANTHROPIC_KEY</code> · Value: your actual API key. Click "Add new secret."</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Access it in code with <code>process.env</code></h4><p><code>const key = process.env.ANTHROPIC_KEY</code> :: reads the secret without it ever appearing in your code. Safe to share the code now.</p></div></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="project">
+  <div class="section-number"> Section 8 Project</div>
+  <h2>Your Custom AI Chatbot :: Live &amp; Shareable</h2>
+  <div class="exercise">
+    <div class="exercise-label">Build This</div>
+    <h3>A themed AI chatbot, built on Claude API, deployed on Replit</h3>
+    <p>Make it something you'd actually use or show off :: give it a strong personality and a clear purpose.</p>
+    <ul>
+      <li>A well-crafted <strong>system prompt</strong> with a clear personality</li>
+      <li>A <strong>chat interface</strong> that looks polished</li>
+      <li>Maintains <strong>conversation history</strong> (context across messages)</li>
+      <li>API key stored safely in <strong>Replit Secrets</strong></li>
+      <li>The Replit URL is live and <strong>shareable with anyone</strong></li>
+    </ul>
+  </div>
+</div>
+
+
+  <div class="finish">
+    <button class="btn red" data-complete="section-08">Mark section complete</button>
+    <div class="pager">
+        <a class="btn ghost" href="section-07.html">&larr; Section 07</a>
+        <a class="btn ghost" href="section-09.html">Section 09 &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 MØNTAN1 Academy :: Free forever</span>
+    <span>Drawn: B0SEPHUS G. ALTAMONT :: Checked: MERCER LANG</span>
+    <a href="https://m0ntan1.com">m0ntan1.com</a>
+  </footer>
+</div>
+
+<script src="../assets/academy.js"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 04 :: AI as Your Coding Co-Pilot :: MØNTAN1 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/academy.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="../index.html">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></a>
+    <nav>
+      <a href="../index.html">Curriculum</a>
+      <a href="../setup.html">Setup</a>
+    </nav>
+    <a class="cta" href="https://m0ntan1.com">MØNTAN1</a>
+  </header>
+
+  <section class="lesson-head">
+    <div class="eyebrow">[ SECTION 04 :: PART I :: FOUNDATIONS ]</div>
+    <h1>AI as Your Coding Co-Pilot<span class="red">.</span></h1>
+    <p class="intro">The skill of this decade is not memorizing syntax. It is directing an AI that knows the syntax. This section teaches the prompting workflow the rest of the primer leans on.</p>
+    <div class="lesson-meta">
+      <span><b>Time</b> ~45 min</span>
+      <span><b>Tools</b> Claude</span>
+      <span><b>Cost</b> $0</span>
+    </div>
+  </section>
+
+  <div class="tool-rail reveal">
+    <span class="tr-label">Tools</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5 13.9 8l4.7-4.8 1.3 1.3L15.1 9.3l6.4-.9.3 1.8-6.4.9 5.8 2.9-.9 1.7-5.8-2.9 3.4 5.5-1.6 1-3.4-5.5-.6 6.5-1.8-.2.6-6.5-4.7 4.5-1.3-1.3 4.7-4.5-6.4 1.3-.4-1.8 6.4-1.3-5.9-2.7.8-1.7 5.9 2.7L8 3l1.7-.8 2.3 6V1.5z"/></svg></span>Claude</span>
+  </div>
+
+  <div class="objectives reveal">
+    <h3>You will learn</h3>
+    <ul>
+      <li>Write prompts with context, constraint, and intent</li>
+      <li>Iterate on AI output instead of accepting the first draft</li>
+      <li>Keep a prompt library that compounds</li>
+      <li>Use Claude to review code, not just write it</li>
+    </ul>
+  </div>
+
+  <!-- Lesson body ported at build time from weeks/week4.html -->
+<div class="lesson-section" id="l1">
+  <div class="section-number">Lesson 1 of 4</div>
+  <h2>The Anatomy of a Great Prompt</h2>
+  <p>You've been using Claude all month. this section we slow down and get intentional about it. The difference between a mediocre AI output and a great one is almost always the quality of the prompt.</p>
+  <div class="diagram">
+    <div class="diagram-title"> What every strong coding prompt contains</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.2);border-radius:12px;padding:16px">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--gold-light);margin-bottom:8px"> CONTEXT</div>
+        <p style="font-size:0.83rem;color:var(--muted);margin:0">Who you are, what you're building, what you've already done. "I'm a beginner building a portfolio site..."</p>
+      </div>
+      <div style="background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.2);border-radius:12px;padding:16px">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--blue-light);margin-bottom:8px"> SPECIFICS</div>
+        <p style="font-size:0.83rem;color:var(--muted);margin:0">Exactly what you want. Not "make it look good" but "use a dark background, white text, Playfair Display font, purple accent."</p>
+      </div>
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:16px">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--steel-light);margin-bottom:8px"> YOUR CODE</div>
+        <p style="font-size:0.83rem;color:var(--muted);margin:0">Paste what you have. Never describe code when you can show it. Claude can only work with what you give it.</p>
+      </div>
+      <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:16px">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--green);margin-bottom:8px"> SKILL LEVEL</div>
+        <p style="font-size:0.83rem;color:var(--muted);margin:0">"I'm a beginner" or "Explain what each part does." This changes how Claude explains things dramatically.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l2">
+  <div class="section-number">Lesson 2 of 4</div>
+  <h2>Iterative Prompting: The Real Workflow</h2>
+  <p>Vibe development isn't one big prompt. It's a conversation. You get something back, you react, you redirect. Each message builds on the last.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Start broad, then zoom in</h4><p>First prompt: describe the whole thing. "Build me a landing page for a dog-walking service." Get the structure first, style second, interactions third.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>React specifically to what you got</h4><p>Don't say "make it better." Say "the hero section is too tall, the button color clashes with the background, and I want the font to be more modern."</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Keep the same conversation thread</h4><p>Claude remembers everything said earlier in a chat. Don't start a new chat for each request :: keep iterating in the same thread.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Ask Claude to explain what it changed</h4><p>"Can you summarize what you changed and why?" This turns every Claude response into a mini-lesson.</p></div></div>
+  </div>
+</div>
+
+<div class="lesson-section" id="l3">
+  <div class="section-number">Lesson 3 of 4</div>
+  <h2>Building Your Prompt Library</h2>
+  <p>The best vibe developers keep a personal collection of prompts that work. Every time Claude gives you a great output, save the prompt that produced it. This becomes your secret weapon.</p>
+  <div class="callout callout-tip">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Your prompt library setup</div>
+    <p>Create a file called <code>prompts.md</code> in your VS Code project. Organize prompts by category: HTML, CSS, JavaScript, Debugging, Explaining Code. Add to it every week. By Section 12, you'll have a personal playbook.</p></div>
+  </div>
+  <div class="prompt-box">
+    <p>── DEBUGGING ────────────────────────────
+"My [HTML/CSS/JS] isn't working. Error: [paste error]. Code: [paste code]. Fix it and explain what was wrong."
+
+── LEARNING ─────────────────────────────
+"Explain this code to me like I'm a beginner, one line at a time: [paste code]"
+
+── STARTING FRESH ───────────────────────
+"Build me a [type] page for [purpose]. Include [elements]. Style it with [colors/fonts]. I'm a beginner :: add comments explaining each section."</p>
+  </div>
+</div>
+
+<div class="lesson-section" id="l4">
+  <div class="section-number">Lesson 4 of 4</div>
+  <h2>Using Claude for Code Review</h2>
+  <p>Claude isn't just for generating code :: it's an excellent reviewer. After you build something, ask Claude to critique it. This accelerates learning dramatically.</p>
+  <div class="prompt-box">
+    <p>Review this code I wrote as a beginner. Tell me:
+1. What I did well
+2. What could be improved or simplified
+3. Any bugs or potential issues
+4. What a more experienced developer would do differently
+Here's the code: [paste it]</p>
+  </div>
+  <div class="prompt-box">
+    <p>Is there a cleaner or simpler way to write this JavaScript? I'm learning and want to understand best practices:
+[paste your JS]</p>
+  </div>
+</div>
+
+<div class="lesson-section" id="project">
+  <div class="section-number"> Section 4 Project</div>
+  <h2>Rebuild Something :: With Only Prompts</h2>
+  <div class="exercise">
+    <div class="exercise-label">Build This</div>
+    <h3>Take a Section 1 :: 3 project and rebuild it entirely through prompts</h3>
+    <p>The twist: this time, don't touch the code directly. Everything goes through Claude. You are the creative director :: you describe, review, and redirect. Claude codes.</p>
+    <ul>
+      <li>Pick your quiz page, about me page, or styled site</li>
+      <li>Start a fresh Claude conversation</li>
+      <li>Describe what you want to build from scratch, then iterate</li>
+      <li>After 5 :: 6 exchanges, ask Claude to review the final code</li>
+      <li>Save your best prompts in your <code>prompts.md</code> library</li>
+    </ul>
+  </div>
+</div>
+
+
+  <div class="finish">
+    <button class="btn red" data-complete="section-04">Mark section complete</button>
+    <div class="pager">
+        <a class="btn ghost" href="section-03.html">&larr; Section 03</a>
+        <a class="btn ghost" href="section-05.html">Section 05 &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 MØNTAN1 Academy :: Free forever</span>
+    <span>Drawn: B0SEPHUS G. ALTAMONT :: Checked: MERCER LANG</span>
+    <a href="https://m0ntan1.com">m0ntan1.com</a>
+  </footer>
+</div>
+
+<script src="../assets/academy.js"></script>
+</body>
+</html>

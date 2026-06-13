@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 02 :: Making Things Look Good with CSS :: MØNTAN1 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/academy.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="../index.html">M<span class="o">Ø</span>NTAN1<small>ACADEMY</small></a>
+    <nav>
+      <a href="../index.html">Curriculum</a>
+      <a href="../setup.html">Setup</a>
+    </nav>
+    <a class="cta" href="https://m0ntan1.com">MØNTAN1</a>
+  </header>
+
+  <section class="lesson-head">
+    <div class="eyebrow">[ SECTION 02 :: PART I :: FOUNDATIONS ]</div>
+    <h1>Making Things Look Good with CSS<span class="red">.</span></h1>
+    <p class="intro">HTML gives a page bones. CSS gives it a face. This section covers the handful of CSS ideas that do most of the work on the modern web.</p>
+    <div class="lesson-meta">
+      <span><b>Time</b> ~45 min</span>
+      <span><b>Tools</b> VS Code, Claude</span>
+      <span><b>Cost</b> $0</span>
+    </div>
+  </section>
+
+  <div class="tool-rail reveal">
+    <span class="tr-label">Tools</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.4 2.1 9.9 9.3 5.3 5.8l-1.7.8 3.9 5.4-3.9 5.4 1.7.8 4.6-3.5 7.5 7.2 3-1.5V3.6l-3-1.5zm.1 4.6v10.6l-5.6-5.3 5.6-5.3z"/></svg></span>VS Code</span>
+      <span class="tool-chip"><span class="tl"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5 13.9 8l4.7-4.8 1.3 1.3L15.1 9.3l6.4-.9.3 1.8-6.4.9 5.8 2.9-.9 1.7-5.8-2.9 3.4 5.5-1.6 1-3.4-5.5-.6 6.5-1.8-.2.6-6.5-4.7 4.5-1.3-1.3 4.7-4.5-6.4 1.3-.4-1.8 6.4-1.3-5.9-2.7.8-1.7 5.9 2.7L8 3l1.7-.8 2.3 6V1.5z"/></svg></span>Claude</span>
+  </div>
+
+  <div class="objectives reveal">
+    <h3>You will learn</h3>
+    <ul>
+      <li>Understand what CSS controls and how it attaches to HTML</li>
+      <li>Set colors, fonts, and spacing with intention</li>
+      <li>Lay out a page with flexbox</li>
+      <li>Add hover states that make a page feel alive</li>
+    </ul>
+  </div>
+
+  <div class="ba reveal">
+      <figure class="ba-col"><figcaption>Before :: HTML only</figcaption>
+        <div class="ba-card ba-plain"><b>About Me</b><p>Hi, I'm building things.</p><a>Contact</a></div>
+      </figure>
+      <div class="ba-arrow">CSS &rarr;</div>
+      <figure class="ba-col"><figcaption>After :: styled</figcaption>
+        <div class="ba-card ba-styled"><b>About Me</b><p>Hi, I'm building things.</p><a>Contact</a></div>
+      </figure>
+    </div>
+
+  <!-- Lesson body ported at build time from weeks/week2.html -->
+<div class="lesson-section" id="l1">
+  <div class="section-number">Lesson 1 of 4</div>
+  <h2>What CSS Does</h2>
+  <p>CSS (Cascading Style Sheets) is what makes HTML look good. One CSS file controls the entire visual appearance of your site :: colors, fonts, spacing, layout. Change one line and the whole site updates.</p><div class="wv-example">
+  <div class="wv-example-label"> WV Real-World Example :: Small Business</div>
+  <p>That Charleston restaurant with the beautiful website? Their HTML is the menu items and headings. Their CSS is the dark wood aesthetic, the gold text, the clean layout. Same structure :: completely different look. You'll be able to do this by end of week.</p>
+</div>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">style.css</span></div>
+    <pre><span class="tc">h1</span> {
+  <span class="at">color</span>: <span class="vl">#c9a84c</span>;       <span class="cm">/* gold */</span>
+  <span class="at">font-size</span>: <span class="vl">48px</span>;
+  <span class="at">font-family</span>: <span class="vl">Georgia, serif</span>;
+}
+<span class="tc">p</span> {
+  <span class="at">color</span>: <span class="vl">#555</span>;
+  <span class="at">line-height</span>: <span class="vl">1.7</span>;
+  <span class="at">max-width</span>: <span class="vl">600px</span>;
+}</pre>
+  </div>
+  <div class="callout callout-tool">
+    <span class="callout-icon"></span>
+    <div class="callout-body"><div class="callout-label">Claude tip</div>
+    <p>Don't know the CSS property for what you want? Describe it: "How do I make text bigger and add space underneath?" Claude will tell you <code>font-size</code> and <code>margin-bottom</code>. You learn the vocabulary by doing.</p></div>
+  </div>
+</div>
+<div class="lesson-section" id="l2">
+  <div class="section-number">Lesson 2 of 4</div>
+  <h2>Colors, Fonts &amp; Spacing</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num"></div><div class="step-content"><h4>Colors</h4><p>Use hex codes like <code>#c9a84c</code> or names like <code>steelblue</code>. Go to <a href="https://coolors.co" target="_blank">coolors.co</a> to generate palettes :: lock a WV gold and hit spacebar for matching colors. Paste the hex codes directly into your Claude prompt.</p></div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><h4>Fonts</h4><p>Go to <a href="https://fonts.google.com" target="_blank">fonts.google.com</a> → pick a font → copy the &lt;link&gt; tag → paste into your HTML &lt;head&gt;. Then use it in CSS: <code>font-family: 'Playfair Display', serif;</code>. Free, loads fast.</p></div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><h4>Spacing</h4><p><code>margin</code> = space outside. <code>padding</code> = space inside. <code>margin: 0 auto</code> centers a block. Ask Claude anytime you're not sure.</p></div></div>
+  </div>
+  <div class="prompt-box"><p>Style my HTML page with:
+- Font: use 'Lora' from Google Fonts for headings
+- Colors: #060810 background, #e8ecf4 text, #c9a84c gold accent, #2563a8 blue accent  
+- Centered layout, max-width 700px, generous padding
+- Smooth hover effects on links
+Write the full CSS file and the link tag for my HTML head.</p></div>
+</div>
+<div class="lesson-section" id="l3">
+  <div class="section-number">Lesson 3 of 4</div>
+  <h2>Layout with Flexbox</h2>
+  <p>Flexbox is how you put things side by side :: nav links in a row, cards next to each other, content centered. One property changes everything.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">style.css</span></div>
+    <pre><span class="tc">.nav</span> {
+  <span class="at">display</span>: <span class="vl">flex</span>;           <span class="cm">/* puts children side by side */</span>
+  <span class="at">gap</span>: <span class="vl">24px</span>;             <span class="cm">/* space between items */</span>
+  <span class="at">justify-content</span>: <span class="vl">center</span>; <span class="cm">/* center horizontally */</span>
+}</pre>
+  </div><div class="wv-example">
+  <div class="wv-example-label"> WV Real-World Example :: Job Seeker</div>
+  <p>Flexbox is one of the top CSS concepts asked about in junior developer interviews. Learning it now :: even imperfectly :: puts you ahead of people who've been 'thinking about coding' for years.</p>
+</div>
+</div>
+<div class="lesson-section" id="l4">
+  <div class="section-number">Lesson 4 of 4</div>
+  <h2>Hover Effects</h2>
+  <p>Small interactions make a page feel alive. CSS handles these with almost no code.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">style.css</span></div>
+    <pre><span class="tc">.button</span> {
+  <span class="at">background</span>: <span class="vl">#c9a84c</span>;
+  <span class="at">transition</span>: <span class="vl">all 0.2s ease</span>;
+}
+<span class="tc">.button:hover</span> {
+  <span class="at">background</span>: <span class="vl">#7a5e22</span>;
+  <span class="at">transform</span>: <span class="vl">translateY(-2px)</span>;
+}</pre>
+  </div>
+</div>
+<div class="lesson-section" id="project">
+  <div class="section-number"> Section 2 Project</div>
+  <h2>Style Your About Me Page :: Then Commit It</h2>
+  <div class="exercise">
+    <div class="exercise-label">Build This</div>
+    <h3>Transform Section 1's HTML into something beautiful</h3>
+    <ul>
+      <li>Pick a color palette from <strong>coolors.co</strong></li>
+      <li>Add a <strong>Google Font</strong> for headings</li>
+      <li>Center the content with a <strong>max-width</strong></li>
+      <li>Add <strong>hover effects</strong> on your links</li>
+      <li><strong>Commit to GitHub</strong>: "Add Section 2 CSS styling"</li>
+    </ul>
+  </div>
+</div>
+
+
+  <div class="finish">
+    <button class="btn red" data-complete="section-02">Mark section complete</button>
+    <div class="pager">
+        <a class="btn ghost" href="section-01.html">&larr; Section 01</a>
+        <a class="btn ghost" href="section-03.html">Section 03 &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 MØNTAN1 Academy :: Free forever</span>
+    <span>Drawn: B0SEPHUS G. ALTAMONT :: Checked: MERCER LANG</span>
+    <a href="https://m0ntan1.com">m0ntan1.com</a>
+  </footer>
+</div>
+
+<script src="../assets/academy.js"></script>
+</body>
+</html>

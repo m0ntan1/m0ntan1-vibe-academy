@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>M0NTAN1 FINANCIAL: Building an Autonomous Trading Firm with AI — MØNTAN1 Academy</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabinet+Grotesk:wght@300;400;500;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  --bg: #060810;
+  --surface: #0d1017;
+  --surface2: #131720;
+  --border: #1e2535;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dim: #7a5e22;
+  --blue: #2563a8;
+  --blue-light: #5b9bd5;
+  --blue-dim: #1a3d6b;
+  --steel: #3a7ca5;
+  --steel-light: #7fb3d3;
+  --green: #2d9e6b;
+  --green-light: #4dbb8a;
+  --red: #c0392b;
+  --text: #e8ecf4;
+  --muted: #5a6680;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+body::before {
+  content:'';
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 5% 0%, rgba(201,168,76,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 95% 90%, rgba(37,99,168,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(58,124,165,0.03) 0%, transparent 60%);
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position:fixed; left:0; top:0; bottom:0; width:268px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 26px 16px;
+  overflow-y: auto; z-index:20;
+  display:flex; flex-direction:column;
+}
+
+.sidebar-logo {
+  display:flex; align-items:center; gap:10px;
+  margin-bottom: 4px;
+}
+.sidebar-logo-mark {
+  width:34px; height:34px; border-radius:8px; flex-shrink:0;
+  background: linear-gradient(135deg, var(--gold), var(--blue));
+  display:grid; place-items:center;
+  font-family:'Bebas Neue',sans-serif; font-size:16px; color:#fff; letter-spacing:0.05em;
+}
+.sidebar-org {
+  font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.08em;
+  color: var(--text); line-height:1.1;
+}
+.sidebar-sub {
+  font-size:9px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase;
+  color: var(--gold); margin-top:1px;
+}
+.sidebar-tagline {
+  font-size:10px; color:var(--muted); margin-bottom:22px; padding-left:44px;
+}
+
+.nav-section-label {
+  font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--muted); padding:0 8px; margin:14px 0 5px;
+}
+
+.nav-item {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 10px; border-radius:8px; margin-bottom:2px;
+  text-decoration:none; color:var(--muted); font-size:0.82rem;
+  font-weight:500; border:1px solid transparent; transition:all 0.18s;
+}
+.nav-item:hover { background:var(--surface2); color:var(--text); }
+.nav-item.active {
+  background: rgba(201,168,76,0.10);
+  border-color: rgba(201,168,76,0.25);
+  color: var(--gold-light);
+}
+.nav-item.active.p2 {
+  background: rgba(37,99,168,0.12);
+  border-color: rgba(37,99,168,0.28);
+  color: var(--blue-light);
+}
+.nav-item.active.p3 {
+  background: rgba(58,124,165,0.10);
+  border-color: rgba(58,124,165,0.25);
+  color: var(--steel-light);
+}
+.nav-item.done { color: var(--green-light); }
+.nav-item.done::after { content:''; margin-left:auto; font-size:11px; }
+.nav-icon { font-size:13px; width:18px; text-align:center; flex-shrink:0; }
+.nav-divider { height:1px; background:var(--border); margin:10px 0; }
+
+.sidebar-progress { margin-top:auto; padding-top:18px; border-top:1px solid var(--border); }
+.sp-label { display:flex; justify-content:space-between; font-size:10px; color:var(--muted); margin-bottom:6px; }
+.sp-bar { height:3px; background:rgba(255,255,255,0.05); border-radius:100px; overflow:hidden; }
+.sp-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--gold),var(--blue-light)); transition:width 0.5s; }
+
+/* ── MAIN ── */
+.main { margin-left:268px; padding:52px 56px 120px; max-width:920px; position:relative; z-index:1; }
+
+/* ── LESSON HEADER ── */
+.lesson-header { margin-bottom:52px; }
+.week-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  border-radius:6px; padding:5px 14px; margin-bottom:16px;
+  font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;
+}
+.week-badge.p1 { background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.25); color:var(--gold-light); }
+.week-badge.p2 { background:rgba(37,99,168,0.1); border:1px solid rgba(37,99,168,0.3); color:var(--blue-light); }
+.week-badge.p3 { background:rgba(58,124,165,0.1); border:1px solid rgba(58,124,165,0.28); color:var(--steel-light); }
+.week-badge.setup { background:rgba(45,158,107,0.1); border:1px solid rgba(45,158,107,0.25); color:var(--green-light); }
+
+h1 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,5vw,4.2rem); line-height:1.0; letter-spacing:0.03em;
+  margin-bottom:14px;
+  background:linear-gradient(135deg,#fff 0%,var(--gold-light) 50%,var(--blue-light) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+
+.lesson-meta { display:flex; gap:18px; flex-wrap:wrap; font-size:0.82rem; color:var(--muted); margin-bottom:20px; font-weight:500; }
+.intro-text { font-size:1rem; color:rgba(232,236,244,0.7); line-height:1.85; max-width:620px; }
+
+/* ── SECTIONS ── */
+.lesson-section { margin-bottom:60px; scroll-margin-top:28px; }
+.section-number {
+  font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:5px;
+}
+
+h2 { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:0.04em; margin-bottom:12px; line-height:1.1; }
+h3 { font-family:'Cabinet Grotesk',sans-serif; font-weight:700; font-size:1.05rem; margin-bottom:10px; }
+p { color:rgba(232,236,244,0.76); margin-bottom:14px; }
+p:last-child { margin-bottom:0; }
+strong { color:var(--text); font-weight:700; }
+a { color:var(--gold-light); }
+code {
+  font-family:'Fira Code',monospace; font-size:12px;
+  background:rgba(255,255,255,0.06); border:1px solid var(--border);
+  padding:2px 7px; border-radius:4px; color:var(--gold-light);
+}
+
+/* ── DIAGRAM ── */
+.diagram {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:14px; padding:26px; margin:22px 0;
+}
+.diagram-title {
+  font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:20px; display:flex; align-items:center; gap:10px;
+}
+.diagram-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.flow { display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:0; }
+.flow-step { display:flex; flex-direction:column; align-items:center; gap:8px; min-width:88px; }
+.flow-icon { width:56px; height:56px; border-radius:12px; display:grid; place-items:center; font-size:24px; border:1px solid var(--border); }
+.flow-label { font-size:11px; color:var(--muted); text-align:center; line-height:1.3; font-weight:600; }
+.flow-sub { font-size:9px; color:rgba(90,102,128,0.6); text-align:center; }
+.flow-arrow { font-size:16px; color:var(--border); padding:0 6px; margin-bottom:20px; }
+
+/* ── CODE BLOCKS ── */
+.code-block { background:#07090e; border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:18px 0; }
+.code-header {
+  background:var(--surface2); border-bottom:1px solid var(--border);
+  padding:8px 14px; display:flex; align-items:center; gap:7px;
+}
+.code-dot { width:9px; height:9px; border-radius:50%; }
+.code-filename { font-family:'Fira Code',monospace; font-size:11px; color:var(--muted); margin-left:4px; }
+pre { padding:18px 20px; overflow-x:auto; font-family:'Fira Code',monospace; font-size:12.5px; line-height:1.75; }
+.kw{color:#c4b5fd;} .tc{color:#7fb3d3;} .at{color:var(--gold-light);}
+.vl{color:#86efac;} .cm{color:#2a3347;font-style:italic;} .tx{color:#e8ecf4;}
+.st{color:#fda4af;}
+
+/* ── CALLOUTS ── */
+.callout { border-radius:12px; padding:16px 20px; margin:18px 0; display:flex; gap:14px; }
+.callout-tip  { background:rgba(45,158,107,0.07); border:1px solid rgba(45,158,107,0.2); }
+.callout-note { background:rgba(37,99,168,0.07); border:1px solid rgba(37,99,168,0.22); }
+.callout-warn { background:rgba(201,168,76,0.07); border:1px solid rgba(201,168,76,0.2); }
+.callout-tool { background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.18); }
+.callout-wv   { background:rgba(37,99,168,0.08); border-left:3px solid var(--gold); border-radius:0 12px 12px 0; }
+.callout-icon { font-size:18px; flex-shrink:0; margin-top:2px; }
+.callout-body { flex:1; }
+.callout-label {
+  font-size:9px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:4px;
+}
+.callout-tip  .callout-label { color:var(--green-light); }
+.callout-note .callout-label { color:var(--blue-light); }
+.callout-warn .callout-label { color:var(--gold-light); }
+.callout-tool .callout-label { color:var(--gold-light); }
+.callout-wv   .callout-label { color:var(--gold); }
+.callout p { font-size:0.87rem; margin:0; }
+
+/* ── STEPS ── */
+.steps { display:flex; flex-direction:column; gap:12px; margin:18px 0; }
+.step {
+  display:flex; gap:16px; align-items:flex-start;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:16px; transition:border-color 0.18s;
+}
+.step:hover { border-color:rgba(201,168,76,0.25); }
+.step-num {
+  width:28px; height:28px; border-radius:7px; flex-shrink:0;
+  background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.22);
+  color:var(--gold-light); font-weight:800; font-size:12px; display:grid; place-items:center;
+}
+.step-content h4 { font-weight:700; font-size:0.93rem; margin-bottom:4px; }
+.step-content p { margin:0; font-size:0.85rem; color:var(--muted); }
+
+/* ── TRY IT ── */
+.try-it { background:var(--surface2); border:1px solid var(--border); border-radius:14px; padding:22px; margin:20px 0; }
+.try-it-badge {
+  display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.22);
+  color:var(--gold-light); font-weight:700; font-size:9px; letter-spacing:0.1em; text-transform:uppercase;
+  padding:3px 10px; border-radius:5px; margin-bottom:10px;
+}
+.try-it h3 { font-weight:700; font-size:0.98rem; margin-bottom:8px; }
+.try-it p, .try-it ol, .try-it ul { font-size:0.87rem; color:var(--muted); }
+.try-it ol, .try-it ul { padding-left:18px; }
+.try-it li { margin-bottom:6px; }
+.try-it li strong { color:var(--text); }
+
+/* ── TOOL CARD ── */
+.tool-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:13px; padding:18px 20px; margin-bottom:10px;
+  display:flex; gap:16px; align-items:flex-start; transition:border-color 0.18s;
+}
+.tool-card:hover { border-color:rgba(201,168,76,0.28); }
+.tool-emoji { font-size:26px; flex-shrink:0; }
+.tool-info { flex:1; }
+.tool-name { font-weight:800; font-size:0.97rem; margin-bottom:2px; }
+.tool-desc { font-size:0.83rem; color:var(--muted); margin-bottom:8px; }
+.tool-link {
+  display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:700;
+  letter-spacing:0.06em; text-transform:uppercase; color:var(--gold-light); text-decoration:none;
+  border:1px solid rgba(201,168,76,0.25); border-radius:6px; padding:4px 10px; transition:all 0.18s;
+}
+.tool-link:hover { background:rgba(201,168,76,0.1); }
+
+/* ── EXERCISE ── */
+.exercise {
+  background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(37,99,168,0.05));
+  border:1px solid rgba(201,168,76,0.16); border-radius:16px; padding:26px; margin:26px 0;
+}
+.exercise-label {
+  font-size:9px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--gold-light); margin-bottom:8px;
+}
+.exercise h3 { font-size:1.08rem; margin-bottom:8px; }
+.exercise p { font-size:0.88rem; }
+.exercise ul { padding-left:18px; color:var(--muted); font-size:0.87rem; margin-top:10px; }
+.exercise ul li { margin-bottom:6px; }
+.exercise ul li strong { color:var(--text); }
+
+/* ── WV CALLOUT special ── */
+.wv-example {
+  background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(37,99,168,0.06));
+  border:1px solid rgba(201,168,76,0.2); border-radius:13px; padding:18px 20px; margin:18px 0;
+}
+.wv-example-label {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:9px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:8px;
+}
+.wv-example p { font-size:0.87rem; color:rgba(232,236,244,0.75); margin:0; }
+
+/* ── PRINCIPLE CARDS ── */
+.principle-grid { display:flex; flex-direction:column; gap:10px; margin:18px 0; }
+.principle-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:16px 18px; transition:border-color 0.18s;
+}
+.principle-card:hover { border-color:rgba(201,168,76,0.25); }
+.principle-num {
+  display:inline-block; font-size:10px; font-weight:800; color:var(--gold-light);
+  background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.22);
+  padding:2px 8px; border-radius:5px; margin-bottom:6px;
+}
+.principle-card h4 { font-weight:700; font-size:0.93rem; margin-bottom:4px; }
+.principle-card p { margin:0; font-size:0.83rem; color:var(--muted); }
+
+/* ── IMPACT CARD (for punch list) ── */
+.impact-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:18px 20px; margin-bottom:12px; transition:border-color 0.18s;
+  border-left:3px solid var(--red);
+}
+.impact-card:hover { border-color:rgba(192,57,43,0.4); }
+.impact-label {
+  display:inline-block; font-size:9px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--red); margin-bottom:6px;
+}
+.impact-card h4 { font-weight:700; font-size:0.93rem; margin-bottom:6px; }
+.impact-card p { margin:0 0 6px; font-size:0.83rem; color:var(--muted); }
+.impact-card .fix { color:var(--green-light); font-size:0.83rem; font-weight:600; }
+
+/* ── AGENT CARD ── */
+.agent-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:18px 0; }
+.agent-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:14px 16px; transition:border-color 0.18s;
+}
+.agent-card:hover { border-color:rgba(201,168,76,0.25); }
+.agent-card h4 { font-weight:700; font-size:0.9rem; margin-bottom:2px; color:var(--gold-light); }
+.agent-card .agent-role { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-bottom:4px; }
+.agent-card p { margin:0; font-size:0.82rem; color:var(--muted); }
+
+/* ── STAT ROW ── */
+.stat-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:12px; margin:18px 0; }
+.stat-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:16px; text-align:center;
+}
+.stat-value { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:0.02em; color:var(--gold-light); }
+.stat-label { font-size:10px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.08em; }
+
+/* ── SECTION NAV (in-page) ── */
+.section-nav { margin-bottom:20px; }
+.section-nav-label {
+  font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:8px;
+}
+.section-nav-links { display:flex; flex-direction:column; gap:2px; }
+.section-nav-link {
+  display:flex; align-items:center; gap:8px;
+  padding:6px 10px; border-radius:6px; text-decoration:none;
+  color:var(--muted); font-size:0.8rem; font-weight:500;
+  transition:all 0.18s;
+}
+.section-nav-link:hover { background:var(--surface2); color:var(--text); }
+.section-nav-num { font-size:10px; font-weight:800; color:var(--gold-dim); width:16px; }
+
+/* ── TABLE ── */
+.db-table { width:100%; border-collapse:collapse; margin:14px 0; font-size:0.82rem; }
+.db-table th {
+  text-align:left; padding:8px 12px; background:var(--surface2); border:1px solid var(--border);
+  font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);
+}
+.db-table td {
+  padding:8px 12px; border:1px solid var(--border); color:rgba(232,236,244,0.7);
+}
+.db-table tr:hover td { background:rgba(201,168,76,0.03); }
+
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+
+@media (max-width:768px) {
+  .sidebar { display:none; }
+  .main { margin-left:0; padding:28px 18px 80px; }
+  .agent-grid { grid-template-columns:1fr; }
+  .stat-row { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<aside class="sidebar"><div class="sidebar-logo">
+  <div class="sidebar-logo-mark">M</div>
+  <div><div class="sidebar-org">MØNTAN1</div><div class="sidebar-sub">ACADEMY</div></div>
+</div>
+<div class="sidebar-tagline">m0ntan1.com</div>
+<a class="nav-item" href="../index.html"><span class="nav-icon">🏠</span> Home</a>
+<a class="nav-item" href="../setup.html"><span class="nav-icon">🛠</span> Setup Day</a>
+<div class="nav-divider"></div>
+<div class="nav-section-label">📂 Case Studies</div>
+<a class="nav-item active" href="m0ntan1-financial.html"><span class="nav-icon">📊</span> M0NTAN1 Financial</a>
+<div class="nav-divider"></div>
+<div class="nav-section-label">📑 This Case Study</div>
+<a class="section-nav-link" href="#s1"><span class="section-nav-num">1</span> The Idea</a>
+<a class="section-nav-link" href="#s2"><span class="section-nav-num">2</span> The Research</a>
+<a class="section-nav-link" href="#s3"><span class="section-nav-num">3</span> The Plan</a>
+<a class="section-nav-link" href="#s4"><span class="section-nav-num">4</span> The Build</a>
+<a class="section-nav-link" href="#s5"><span class="section-nav-num">5</span> The Punch</a>
+<a class="section-nav-link" href="#s6"><span class="section-nav-num">6</span> Advanced Techniques</a>
+<a class="section-nav-link" href="#s7"><span class="section-nav-num">7</span> Where It Stands</a>
+<div class="nav-divider"></div>
+<div class="nav-section-label">⛰ Phase 1 — Foundations</div>
+<a class="nav-item nav-week" data-week="1" href="../weeks/week1.html"><span class="nav-icon">W1</span> Internet Basics</a>
+<a class="nav-item nav-week" data-week="2" href="../weeks/week2.html"><span class="nav-icon">W2</span> CSS & Style</a>
+<a class="nav-item nav-week" data-week="3" href="../weeks/week3.html"><span class="nav-icon">W3</span> JavaScript</a>
+<a class="nav-item nav-week" data-week="4" href="../weeks/week4.html"><span class="nav-icon">W4</span> AI Co-Pilot</a>
+<div class="nav-divider"></div>
+<div class="nav-section-label">⚡ Phase 2 — Build Things</div>
+<a class="nav-item nav-week" data-week="5" href="../weeks/week5.html"><span class="nav-icon">W5</span> Your First Site</a>
+<a class="nav-item nav-week" data-week="6" href="../weeks/week6.html"><span class="nav-icon">W6</span> Landing Pages</a>
+<a class="nav-item nav-week" data-week="7" href="../weeks/week7.html"><span class="nav-icon">W7</span> APIs</a>
+<a class="nav-item nav-week" data-week="8" href="../weeks/week8.html"><span class="nav-icon">W8</span> AI Apps</a>
+<div class="nav-divider"></div>
+<div class="nav-section-label">🚀 Phase 3 — Ship It</div>
+<a class="nav-item nav-week" data-week="9" href="../weeks/week9.html"><span class="nav-icon">W9</span> Hybrid Stack</a>
+<a class="nav-item nav-week" data-week="10" href="../weeks/week10.html"><span class="nav-icon">W10</span> Automations</a>
+<a class="nav-item nav-week" data-week="11" href="../weeks/week11.html"><span class="nav-icon">W11</span> Ship a Product</a>
+<a class="nav-item nav-week" data-week="12" href="../weeks/week12.html"><span class="nav-icon">W12</span> What's Next</a>
+<div class="nav-divider"></div>
+<div class="sidebar-progress">
+  <div class="sp-label"><span>Your progress</span><span id="sp-label">0 / 12</span></div>
+  <div class="sp-bar"><div class="sp-fill" id="sp-fill" style="width:0%"></div></div>
+</div></aside>
+
+<main class="main">
+<div class="lesson-header">
+  <div class="week-badge p1">📊 Project Case Study</div>
+  <h1>M0NTAN1 FINANCIAL: Building an Autonomous Trading Firm with AI</h1>
+  <div class="lesson-meta">
+    <span>📅 Started March 12, 2026</span>
+    <span>🏗 13 Agents · 5 Departments</span>
+    <span>🛠 Python · Alpaca · Discord · SQLite</span>
+  </div>
+  <p class="intro-text">One person. One question: can you build an autonomous trading firm with AI? Not a trading bot. Not a weekend hack. A simulated financial firm where every named role maps to a real software function, and the org chart IS the system architecture. This is the story of building it, breaking it, and learning what the documentation never tells you.</p>
+</div>
+
+<div class="callout callout-wv">
+  <span class="callout-icon">🏔</span>
+  <div class="callout-body"><div class="callout-label">Montani Semper Liberi</div>
+  <p>Mountaineers are always free. This project was built in West Virginia, by a West Virginian, proving that world-class technical work doesn't require a Silicon Valley zip code. The mountains teach patience. The markets demand it.</p></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 1: THE IDEA -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="lesson-section" id="s1">
+  <div class="section-number">Section 1 of 7</div>
+  <h2>The Idea</h2>
+  <p>March 12, 2026. The premise was simple and maybe a little reckless: build an autonomous trading firm where AI agents fill every role, from CEO to trader to risk officer. Not a script that buys when RSI drops below 30. A functioning organization with a chain of command, specialized departments, internal disagreements, and a kill switch.</p>
+
+  <p>The difference matters. A trading bot is one strategy, one loop, one failure mode. A trading <strong>firm</strong> has research analysts who watch the macro environment, risk officers who can override traders, and a market intelligence department that knows the difference between a Tuesday morning dip and a systemic crisis. The firm survives what the bot doesn't.</p>
+
+  <div class="callout callout-note">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body"><div class="callout-label">The Core Insight</div>
+    <p>The org chart IS the system architecture. 13 agents across 5 departments. Each agent has a name, a personality, a backstory, and a specific function. The metaphor isn't decoration. It's the design pattern.</p></div>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">🏢 The Firm — organizational architecture</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.3)">👔</div><div class="flow-label">Executive</div><div class="flow-sub">CEO + COO</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(37,99,168,0.12);border-color:rgba(37,99,168,0.3)">📊</div><div class="flow-label">Trading Desk</div><div class="flow-sub">3 Traders</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(192,57,43,0.12);border-color:rgba(192,57,43,0.3)">🛡</div><div class="flow-label">Risk Mgmt</div><div class="flow-sub">CRO + Officer</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(45,158,107,0.12);border-color:rgba(45,158,107,0.3)">🔬</div><div class="flow-label">Research</div><div class="flow-sub">Analyst + Intel</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(58,124,165,0.12);border-color:rgba(58,124,165,0.3)">⚙️</div><div class="flow-label">Operations</div><div class="flow-sub">HR + Compliance</div></div>
+    </div>
+  </div>
+
+  <p>The research basis was concrete. The TradingAgents framework (Case 10 in our pre-build research) proved that multi-agent systems with specialized roles beat single-strategy bots across three critical metrics: raw returns, Sharpe ratio, and maximum drawdown. That paper turned the metaphor from "interesting idea" to "proven architecture."</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 2: THE RESEARCH -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="lesson-section" id="s2">
+  <div class="section-number">Section 2 of 7</div>
+  <h2>The Research</h2>
+  <p>Before writing a single line of code, we studied 10 documented cases of trading bot failures. Not theoretical failures. Real systems that lost real money (or paper money in revealing ways). The patterns were clear and brutal.</p>
+
+  <h3>The Silent Differentiator: Event Awareness</h3>
+  <p>The single biggest finding across all 10 cases: <strong>bots that ignore economic calendars, earnings dates, and macro events consistently blow up.</strong> It doesn't matter how good your signal is. If your momentum bot buys TSLA the morning before an FOMC rate decision, the signal is noise. Event awareness is not a feature. It's a survival requirement.</p>
+
+  <div class="callout callout-warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body"><div class="callout-label">Key Research Finding</div>
+    <p>Every failed bot we studied shared one trait: it operated as if the market existed in a vacuum. No awareness of what was happening outside the price chart. The market is not a math problem. It's a complex system driven by human decisions, government policy, and global events.</p></div>
+  </div>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Mean reversion fails without regime awareness (Case 1)</h4><p>A bot buying "cheap" stocks in a crashing market is not finding value. It's catching knives. Mean reversion requires the ability to identify the current market regime and know when the strategy is invalid.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>DCA outperforms timing in volatile conditions (Cases 2-3)</h4><p>Dollar-cost averaging is boring. It also survived scenarios that destroyed timing-based strategies. When volatility spikes, the simple approach wins because it doesn't need to be right about direction on any given day.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Momentum thrives in trends, dies in sideways and crisis (Cases 6-7)</h4><p>Momentum strategies printed money in clear trends and hemorrhaged it in sideways chop and sudden crises. The strategy isn't broken. Using it in the wrong regime is broken.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Multi-agent architecture proved superior (Case 10)</h4><p>The TradingAgents paper showed specialized agents outperforming monolithic bots. Different roles bring different perspectives. Disagreement between agents creates robustness. This became the foundation of the entire M0NTAN1 Financial architecture.</p></div></div>
+  </div>
+
+  <div class="callout callout-tip">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body"><div class="callout-label">The Takeaway</div>
+    <p>No strategy works all the time. Every strategy works some of the time. The winning architecture doesn't pick the best strategy. It picks the right strategy for the current conditions and has the discipline to sit out when no strategy fits.</p></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 3: THE PLAN -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="lesson-section" id="s3">
+  <div class="section-number">Section 3 of 7</div>
+  <h2>The Plan</h2>
+  <p>The research produced 12 immutable design principles. These aren't aspirational guidelines. They're load-bearing constraints that shaped every technical decision in the system.</p>
+
+  <div class="principle-grid">
+    <div class="principle-card">
+      <div class="principle-num">01</div>
+      <h4>The metaphor IS the architecture</h4>
+      <p>Every org chart role maps to a real software function. CEO makes portfolio-level decisions. Risk officer evaluates exposure. Traders execute strategies. The metaphor isn't for documentation. It IS the code structure.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">02</div>
+      <h4>Chain of command prevents emotional override</h4>
+      <p>A trader can't override the risk officer. The risk officer can't override the CEO's strategic direction. Hierarchy exists because in volatile markets, you need something more disciplined than "the last agent to run wins."</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">03</div>
+      <h4>No firing. Retrain via transfer learning.</h4>
+      <p>When an agent underperforms, it doesn't get deleted. It gets retrained. Its historical data is preserved, its parameters adjusted, its strategy evolved. Destroying knowledge is never the answer.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">04</div>
+      <h4>Agents must disagree</h4>
+      <p>Consensus is dangerous. If all three traders want the same position, the system should be suspicious, not confident. Built-in disagreement creates the tension that prevents groupthink blowups.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">05</div>
+      <h4>Data contract before code</h4>
+      <p>Before any agent writes a report, the schema is agreed upon. Standardized formats. Known fields. Predictable structures. If you can't define the output, you can't build the consumer.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">06</div>
+      <h4>HR files = configuration specs</h4>
+      <p>Each agent has an HR file. The backstory encodes trading philosophy. The personality section governs parameter selection. "Cautious and methodical" isn't flavor text. It maps to specific risk tolerance values.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">07</div>
+      <h4>Knowledge is never deleted</h4>
+      <p>Every trade, every decision, every market observation is stored permanently. Bad trades are as valuable as good ones. The system's memory is its competitive advantage.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">08</div>
+      <h4>Separated risk as architecture</h4>
+      <p>The risk management department has no trading incentive. It exists only to evaluate, constrain, and protect. A risk officer who also trades has a conflict of interest baked into the code.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">09</div>
+      <h4>Event awareness as defense</h4>
+      <p>The market analyst's primary job is preventing blind-spot blowups. Before any trade executes, the system checks: what's happening today? Earnings? FOMC? GDP release? No trading in ignorance.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">10</div>
+      <h4>Regime-conditional activation</h4>
+      <p>Agents only trade in their regime. The momentum trader sits out sideways markets. The mean reversion trader sits out crashes. Knowing when NOT to trade is the hardest lesson, so it's enforced by architecture.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">11</div>
+      <h4>Delta tracking is core</h4>
+      <p>Every collector must track what changed since its last sweep. Not "what is the current state" but "what moved." Deltas compound over time. They're the raw material for pattern recognition.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-num">12</div>
+      <h4>Gated phase progression</h4>
+      <p>Phases advance based on criteria, not calendars. Phase 1 doesn't end after 30 days. It ends when specific technical milestones are proven. Time pressure is the enemy of quality in software and in markets.</p>
+    </div>
+  </div>
+
+  <h3>The Database Schema</h3>
+  <p>13 database tables, each mapping directly to the organizational structure. This is not incidental. The database mirrors the firm because the data model mirrors the decision-making model.</p>
+
+  <table class="db-table">
+    <thead>
+      <tr><th>Table</th><th>Department</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>trades</code></td><td>Trading Desk</td><td>Every executed trade with full context</td></tr>
+      <tr><td><code>positions</code></td><td>Trading Desk</td><td>Current holdings and unrealized P&L</td></tr>
+      <tr><td><code>portfolio_snapshots</code></td><td>Executive</td><td>Point-in-time portfolio state</td></tr>
+      <tr><td><code>risk_assessments</code></td><td>Risk Mgmt</td><td>Pre-trade and portfolio-level risk evaluation</td></tr>
+      <tr><td><code>market_regimes</code></td><td>Research</td><td>Current and historical regime classifications</td></tr>
+      <tr><td><code>agent_performance</code></td><td>Operations</td><td>Per-agent returns, win rate, drawdown</td></tr>
+      <tr><td><code>market_events</code></td><td>Research</td><td>Earnings, FOMC, macro events calendar</td></tr>
+      <tr><td><code>signals</code></td><td>Trading Desk</td><td>Raw strategy signals before risk filtering</td></tr>
+      <tr><td><code>orders</code></td><td>Operations</td><td>Order lifecycle from submission to fill</td></tr>
+      <tr><td><code>daily_reports</code></td><td>Executive</td><td>End-of-day summaries and analysis</td></tr>
+      <tr><td><code>system_logs</code></td><td>Operations</td><td>Operational telemetry and error tracking</td></tr>
+      <tr><td><code>config</code></td><td>Operations</td><td>Runtime parameters and agent configuration</td></tr>
+      <tr><td><code>reconciliation</code></td><td>Operations</td><td>Broker vs. database drift tracking</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The Shark Base Kill Switch</h3>
+  <div class="callout callout-warn">
+    <span class="callout-icon">🦈</span>
+    <div class="callout-body"><div class="callout-label">Shark Base Protocol</div>
+    <p>When portfolio drawdown exceeds a defined threshold, the system enters Shark Base: all trading halts, all open orders cancel, and the system enters a mandatory cool-down period. No agent can override it. No parameter tweak can bypass it. The kill switch exists because the most dangerous moment in trading is when you're losing and convinced you can make it back.</p></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 4: THE BUILD -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="lesson-section" id="s4">
+  <div class="section-number">Section 4 of 7</div>
+  <h2>The Build</h2>
+  <p>The framework is Python, running against Alpaca's paper trading API with $100,000 in simulated equity. The choice was deliberate: Alpaca provides real market data, real order execution semantics, and real broker constraints without risking real capital during development.</p>
+
+  <h3>The Trading Desk: Three Agents, Three Strategies</h3>
+  <div class="agent-grid">
+    <div class="agent-card">
+      <h4>Jett Reno</h4>
+      <div class="agent-role">Momentum Trader</div>
+      <p>Rides trends. Buys breakouts, sells breakdowns. Active in trending regimes, dormant in sideways chop. Named for a character who fixes things under pressure.</p>
+    </div>
+    <div class="agent-card">
+      <h4>Silas Grey</h4>
+      <div class="agent-role">DCA Strategist</div>
+      <p>Dollar-cost averages into positions over time. The patient one. Doesn't care about daily noise. Accumulates during volatility when other agents are sidelined.</p>
+    </div>
+    <div class="agent-card">
+      <h4>Vance Moody</h4>
+      <div class="agent-role">Mean Reversion</div>
+      <p>Buys oversold, sells overbought. Only active when regime analysis confirms a ranging market. The most regime-dependent agent on the desk.</p>
+    </div>
+    <div class="agent-card">
+      <h4>Bosephus</h4>
+      <div class="agent-role">Operations / Order Execution</div>
+      <p>Every trade flows through Bosephus. Pre-flight validation, position sizing, order routing. The gatekeeper between strategy and execution.</p>
+    </div>
+  </div>
+
+  <h3>Risk Management: Wiltmire's 3-Layer Model</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Pre-Trade Risk</h4><p>Before any order submits, Wiltmire evaluates: position size relative to portfolio, correlation with existing holdings, sector concentration, and current market regime. A trade can be rejected before it ever reaches the broker.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Portfolio-Level Risk</h4><p>Continuous monitoring of aggregate exposure, drawdown from peak, sector/asset concentration, and correlation risk. The portfolio view catches what individual trade analysis misses.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Regime-Conditional Limits</h4><p>Risk parameters shift based on market regime. In a crisis regime, position sizes shrink, stop-losses tighten, and new entries require higher conviction thresholds. The system gets more conservative exactly when it needs to.</p></div></div>
+  </div>
+
+  <h3>Market Intelligence: Declan's 5-Regime Classification</h3>
+  <div class="diagram">
+    <div class="diagram-title">🔬 Market Regimes — Declan's classification engine</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(45,158,107,0.12);border-color:rgba(45,158,107,0.3)">📈</div><div class="flow-label">Trending</div><div class="flow-sub">Clear direction</div></div>
+      <div class="flow-arrow">|</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(37,99,168,0.12);border-color:rgba(37,99,168,0.3)">↔️</div><div class="flow-label">Sideways</div><div class="flow-sub">Range-bound</div></div>
+      <div class="flow-arrow">|</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.3)">⚡</div><div class="flow-label">Volatile</div><div class="flow-sub">High VIX, erratic</div></div>
+      <div class="flow-arrow">|</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(192,57,43,0.12);border-color:rgba(192,57,43,0.3)">🔥</div><div class="flow-label">Crisis</div><div class="flow-sub">Systemic risk</div></div>
+      <div class="flow-arrow">|</div>
+      <div class="flow-step"><div class="flow-icon" style="background:rgba(58,124,165,0.12);border-color:rgba(58,124,165,0.3)">🔄</div><div class="flow-label">Transitional</div><div class="flow-sub">Regime shifting</div></div>
+    </div>
+  </div>
+  <p>Each regime activates a different set of agents and adjusts risk parameters. Trending markets unlock Jett Reno. Sideways markets unlock Vance Moody. Volatile markets favor Silas Grey's DCA approach. Crisis mode limits all agents. Transitional regimes keep everyone cautious until a new regime confirms.</p>
+
+  <h3>Discord Bot: The Intercom System</h3>
+  <p>The Discord bot is the firm's intercom. It's how the human operator communicates with the system and how the system communicates back. Daily reports, position updates, trade notifications, risk alerts, and manual commands all flow through Discord channels mapped to departments.</p>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">discord commands (sample)</span></div>
+    <pre><span class="cm"># Core operational commands</span>
+<span class="tx">!portfolio</span>        <span class="cm"># Current positions and P&L</span>
+<span class="tx">!risk</span>             <span class="cm"># Risk assessment snapshot</span>
+<span class="tx">!regime</span>           <span class="cm"># Current market regime</span>
+<span class="tx">!agents</span>           <span class="cm"># Agent status and activity</span>
+<span class="tx">!daily</span>            <span class="cm"># Generate end-of-day report</span>
+<span class="tx">!sharkbase</span>        <span class="cm"># Emergency kill switch</span>
+<span class="tx">!reconcile</span>        <span class="cm"># Force broker/DB reconciliation</span></pre>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 5: THE PUNCH -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="lesson-section" id="s5">
+  <div class="section-number">Section 5 of 7</div>
+  <h2>Everyone Has a Plan Until They Get Punched in the Mouth</h2>
+  <p>This is the heart of the case study. The plan was solid. The architecture was sound. Then the system met the real world and the real world punched back. Here's every hit, what broke, and how it got fixed. These are the lessons you won't find in any API documentation or trading tutorial.</p>
+
+  <div class="callout callout-wv">
+    <span class="callout-icon">🏔</span>
+    <div class="callout-body"><div class="callout-label">Mountain Wisdom</div>
+    <p>In West Virginia, we have a saying: the road to the top is never straight. Every switchback below is something that looked like a straight path on the map but turned out to be a cliff face. You adapt or you don't make it.</p></div>
+  </div>
+
+  <div class="impact-card">
+    <div class="impact-label">Impact 1</div>
+    <h4>Bracket orders only support day time-in-force</h4>
+    <p>The assumption: submit a bracket order (entry + stop loss + take profit) and let it ride for days. The reality: Alpaca bracket orders only accept day TIF. All three legs expire at market close. Every single day. A multi-day swing trade with bracket risk management? Doesn't exist.</p>
+    <p class="fix">Fix: Built manual leg management. The system tracks each leg independently, re-submits protective orders each morning, and handles partial fills gracefully. More code, more edge cases, but now the system actually works across multiple days.</p>
+  </div>
+
+  <div class="impact-card">
+    <div class="impact-label">Impact 2</div>
+    <h4>Pre-market data limitation</h4>
+    <p>The plan: scan pre-market movers starting at 4 AM to position before the opening bell. The reality: Alpaca's free tier doesn't provide pre-market quote data. The morning momentum scan can't start until 9:30 AM when the regular session opens.</p>
+    <p class="fix">Fix: Redesigned the morning routine to use alternative data sources for pre-market awareness and shifted the momentum scan to react to opening-bell price action rather than pre-market signals. Not ideal, but functional.</p>
+  </div>
+
+  <div class="impact-card">
+    <div class="impact-label">Impact 3</div>
+    <h4>Extended hours vs. order type conflict</h4>
+    <p>Extended hours trading on Alpaca only works with pure limit orders. You cannot combine the extended hours flag with stop or stop_limit order types. You also can't have both GTC persistence and extended hours access on the same order. The result: complex daily operational overhead to re-place orders each morning.</p>
+    <p class="fix">Fix: Accepted the constraint. Built a morning re-initialization routine that evaluates overnight price changes, re-calculates stop levels, and re-submits all protective orders for the new trading day. The overhead is real but the discipline it forces is actually valuable.</p>
+  </div>
+
+  <div class="impact-card">
+    <div class="impact-label">Impact 4</div>
+    <h4>Database/broker position drift</h4>
+    <p>The assumption: the database always reflects the broker's actual positions. The reality: drift happens from network timeouts, partial fills, manual broker-side operations, and edge cases in order lifecycle events. Your database says you own 50 shares of AAPL. The broker says 47.</p>
+    <p class="fix">Fix: Built portfolio reconciliation as Step 0.5, running before every trading cycle. The system pulls actual broker positions, compares them against the database, flags discrepancies, and auto-corrects when the delta is within tolerance. Larger deltas require human review.</p>
+  </div>
+
+  <div class="impact-card">
+    <div class="impact-label">Impact 5</div>
+    <h4>Sell orders creating accidental short positions</h4>
+    <p>A sell order based on stale database quantity could overshoot the actual position and accidentally open a short. The database says you have 100 shares. You send a sell for 100. But the broker only has 95 (see Impact 4). Now you're short 5 shares you never intended to hold.</p>
+    <p class="fix">Fix: Built multi-layer pre-flight validation in Bosephus. Before any sell order submits, the system: (a) checks the database quantity, (b) queries the broker for the actual quantity, (c) uses the LOWER of the two, and (d) rejects the order entirely if the discrepancy exceeds a threshold.</p>
+  </div>
+
+  <div class="impact-card">
+    <div class="impact-label">Impact 6</div>
+    <h4>Market context contamination</h4>
+    <p>Weekend crypto trading was contaminating performance data. An ETH trade placed on Saturday during crypto-only hours would get mixed into the same analysis as equity trades placed during full market sessions. The performance metrics were lying because they blended fundamentally different market conditions.</p>
+    <p class="fix">Fix: Built a complete market context tagging system. Every data write across all 7 affected tables gets tagged with one of four contexts: FULL_MARKET, EXTENDED_EQUITY, CRYPTO_ONLY, or MARKET_HOLIDAY. Analysis filters by context. Weekend crypto gains never inflate weekday equity performance again.</p>
+  </div>
+
+  <div class="impact-card">
+    <div class="impact-label">Impact 7</div>
+    <h4>TSLA breakout entry failed on Days 1-2</h4>
+    <p>Jett Reno identified a TSLA breakout setup and placed a day-TIF stop entry order. The price didn't reach the trigger level that day. Order expired. Same thing the next day. By Day 3, the breakout happened but the order wasn't active.</p>
+    <p class="fix">Fix: Changed breakout entry orders to GTC (good-till-cancelled) stops. Breakout strategies require patience. The signal might be right. The timing might take days. A day-TIF entry on a breakout is structurally incompatible with how breakouts work.</p>
+  </div>
+
+  <div class="impact-card">
+    <div class="impact-label">Impact 8</div>
+    <h4>Voice pipeline blocked</h4>
+    <p>The plan included voice-generated briefings through ElevenLabs. The free tier blocks API voice generation entirely. No degraded service. No rate limit. Just blocked.</p>
+    <p class="fix">Fix: Parked for future evaluation. This was a nice-to-have feature, not a core dependency. Text-based Discord reports work fine. When the system generates enough value to justify the subscription, the voice pipeline can be re-enabled.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-label">Reflection</div>
+    <h3>What these failures teach</h3>
+    <p>Notice the pattern. Every single failure came from an assumption that felt reasonable but was never tested against the actual API, the actual broker, or the actual market. The code was fine. The architecture was fine. The assumptions were wrong.</p>
+    <ul>
+      <li><strong>Read the constraints page first.</strong> Not the getting-started guide. The constraints page. The limitations docs. The "known issues" list. That's where reality lives.</li>
+      <li><strong>Test with real order types on Day 1.</strong> Don't build a trade execution engine and test order types on Day 5. Submit a bracket order. See what happens. Learn the constraints before you build around assumptions.</li>
+      <li><strong>Assume drift.</strong> Any system that talks to an external service over a network will drift. Build reconciliation from the start, not as a patch.</li>
+      <li><strong>Tag everything.</strong> If your data can originate in different contexts, tag the context at write time. Not later. Not in a migration. At write time.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 6: ADVANCED TECHNIQUES -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="lesson-section" id="s6">
+  <div class="section-number">Section 6 of 7</div>
+  <h2>Advanced Techniques</h2>
+  <p>Beyond the core architecture and the hard lessons, several techniques emerged during the build that are worth examining on their own. These aren't hacks or workarounds. They're design patterns that apply far beyond trading systems.</p>
+
+  <h3>Market Context Tagging</h3>
+  <p>Every single data write in the system carries a market context tag. This isn't optional. The system determines the current market state (FULL_MARKET during regular equity hours, EXTENDED_EQUITY during pre/post market, CRYPTO_ONLY on weekends, MARKET_HOLIDAY on market holidays) and stamps it on the record. Queries can then filter by context, preventing cross-contamination of performance metrics.</p>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dot" style="background:#f43f5e"></div><div class="code-dot" style="background:#f59e0b"></div><div class="code-dot" style="background:#10b981"></div><span class="code-filename">market_context.py</span></div>
+    <pre><span class="kw">class</span> <span class="tc">MarketContext</span><span class="tx">:</span>
+    <span class="at">FULL_MARKET</span>     <span class="tx">= </span><span class="st">"FULL_MARKET"</span>      <span class="cm"># Regular session, all instruments</span>
+    <span class="at">EXTENDED_EQUITY</span> <span class="tx">= </span><span class="st">"EXTENDED_EQUITY"</span>  <span class="cm"># Pre/post market, equities only</span>
+    <span class="at">CRYPTO_ONLY</span>     <span class="tx">= </span><span class="st">"CRYPTO_ONLY"</span>      <span class="cm"># Weekend, crypto instruments only</span>
+    <span class="at">MARKET_HOLIDAY</span>  <span class="tx">= </span><span class="st">"MARKET_HOLIDAY"</span>   <span class="cm"># Exchange holiday, crypto may trade</span>
+
+<span class="kw">def</span> <span class="tc">get_current_context</span><span class="tx">() -> </span><span class="tc">str</span><span class="tx">:</span>
+    <span class="cm"># Checks exchange calendar, time of day, day of week</span>
+    <span class="cm"># Returns the appropriate context tag</span>
+    <span class="cm"># Applied to EVERY database write across 7 tables</span></pre>
+  </div>
+
+  <h3>The Delta Engine Philosophy</h3>
+  <p>Every data collector in the system tracks what changed since its last sweep. Not "what is the current state" but "what moved, and by how much." This is the delta engine. Raw prices are useful. Knowing that AAPL moved +2.3% since the last check while SPY moved -0.5% is actionable intelligence.</p>
+  <p>Deltas compound over time. A stock that moves +0.5% per check for 8 consecutive checks is telling you something different from a stock that moved +4% in one check and went flat. The delta history IS the signal. Without it, you're looking at snapshots. With it, you're watching a film.</p>
+
+  <div class="callout callout-tip">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body"><div class="callout-label">Design Pattern</div>
+    <p>Delta tracking applies to any system that monitors changing state: inventory management, infrastructure monitoring, social media analytics, sensor networks. If it changes over time, track the deltas, not just the current value.</p></div>
+  </div>
+
+  <h3>Regime-Conditional Agent Activation</h3>
+  <p>This is not "turn agents on and off." It's a matrix of market conditions crossed with agent capabilities. Each agent declares which regimes it operates in. The market intelligence department classifies the current regime. The system activates only the agents whose declared regimes match.</p>
+
+  <table class="db-table">
+    <thead>
+      <tr><th>Agent</th><th>Trending</th><th>Sideways</th><th>Volatile</th><th>Crisis</th><th>Transitional</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Jett Reno</strong></td><td style="color:var(--green-light)">Active</td><td style="color:var(--red)">Dormant</td><td style="color:var(--muted)">Limited</td><td style="color:var(--red)">Dormant</td><td style="color:var(--muted)">Limited</td></tr>
+      <tr><td><strong>Silas Grey</strong></td><td style="color:var(--green-light)">Active</td><td style="color:var(--green-light)">Active</td><td style="color:var(--green-light)">Active</td><td style="color:var(--muted)">Limited</td><td style="color:var(--green-light)">Active</td></tr>
+      <tr><td><strong>Vance Moody</strong></td><td style="color:var(--red)">Dormant</td><td style="color:var(--green-light)">Active</td><td style="color:var(--muted)">Limited</td><td style="color:var(--red)">Dormant</td><td style="color:var(--muted)">Limited</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Separated Risk as Architecture</h3>
+  <p>In most trading bots, risk management is a function inside the trading logic. "If position size exceeds X, reduce." This couples risk evaluation to trading incentive. The agent that wants to trade is also the agent deciding if the trade is too risky. That's a fox guarding the henhouse.</p>
+  <p>In M0NTAN1 Financial, risk management is a separate department with its own agents, its own data, and its own authority. Wiltmire (Chief Risk Officer) can reject a trade that every trader wants. He has no bonus tied to trade volume. His only metric is drawdown prevention.</p>
+
+  <h3>HR Files as Configuration Specs</h3>
+  <p>Each agent has a detailed HR file that reads like a personnel record. This isn't creative writing exercise. The backstory section encodes trading philosophy that maps to strategy selection. The personality traits map to parameter values. "Aggressive and conviction-driven" produces different position sizing math than "cautious and evidence-based."</p>
+  <p>New team members (human or AI) can read an HR file and understand what an agent does, why it does it, and how it will behave in different conditions, without reading a line of code. The documentation is the configuration.</p>
+
+  <h3>Data Contract Before Code</h3>
+  <p>Before any new report or data pipeline was built, the producing agent and all consuming agents agreed on a schema. Field names. Data types. Update frequency. Null handling. This contract was finalized before implementation started. When Declan's regime classification feeds into Jett Reno's activation logic, both sides agree on what "trending" means, what confidence threshold triggers it, and what the fallback is when classification fails.</p>
+
+  <div class="callout callout-note">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body"><div class="callout-label">Why This Matters Beyond Trading</div>
+    <p>Every technique in this section applies to any multi-component system. Microservices need data contracts. Monitoring systems need delta tracking. Role-based access systems need separated concerns. Trading just makes the consequences of getting it wrong extremely visible and extremely fast.</p></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 7: WHERE IT STANDS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="lesson-section" id="s7">
+  <div class="section-number">Section 7 of 7</div>
+  <h2>Where It Stands</h2>
+  <p>Five days in. The system is operational and learning.</p>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-value">3</div>
+      <div class="stat-label">Active Agents</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">3</div>
+      <div class="stat-label">Open Positions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$100K</div>
+      <div class="stat-label">Paper Equity</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">+$295</div>
+      <div class="stat-label">Unrealized P&L</div>
+    </div>
+  </div>
+
+  <p>The numbers are early and small. That's the point. This is Phase 1: prove the architecture works, identify the constraints, build the operational discipline. The ETH position is carrying +$310 in unrealized gains. The equity positions are flat to slightly positive. No catastrophic losses. No accidental shorts (anymore). No contaminated data (anymore).</p>
+
+  <h3>What's Built and Running</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">✓</div><div class="step-content"><h4>Core Framework</h4><p>Python trading engine with Alpaca integration, SQLite database with 13 tables, full order lifecycle management.</p></div></div>
+    <div class="step"><div class="step-num">✓</div><div class="step-content"><h4>Three Trading Agents</h4><p>Jett Reno (momentum), Silas Grey (DCA), and Vance Moody (mean reversion) operational with regime-conditional activation.</p></div></div>
+    <div class="step"><div class="step-num">✓</div><div class="step-content"><h4>Risk Management Layer</h4><p>Wiltmire's 3-layer model: pre-trade, portfolio-level, and regime-conditional risk evaluation.</p></div></div>
+    <div class="step"><div class="step-num">✓</div><div class="step-content"><h4>Discord Bot</h4><p>Full command set live. Portfolio reports, risk snapshots, agent status, manual overrides all operational.</p></div></div>
+    <div class="step"><div class="step-num">✓</div><div class="step-content"><h4>TUI Dashboard</h4><p>Terminal-based dashboard for daily operations. Position monitoring, order tracking, system status at a glance.</p></div></div>
+    <div class="step"><div class="step-num">✓</div><div class="step-content"><h4>Portfolio Reconciliation</h4><p>Step 0.5 broker/database sync running before every cycle. Drift detected and corrected automatically.</p></div></div>
+    <div class="step"><div class="step-num">✓</div><div class="step-content"><h4>Market Context Tagging</h4><p>All 7 data tables tagged with market state on every write. Clean data separation across trading sessions.</p></div></div>
+  </div>
+
+  <h3>What's Next</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">→</div><div class="step-content"><h4>Web Dashboard</h4><p>Charts, performance visualization, and historical analysis. The TUI works for operations. The web dashboard is for strategy review and presentation.</p></div></div>
+    <div class="step"><div class="step-num">→</div><div class="step-content"><h4>Phase 2A Infrastructure</h4><p>Enhanced data pipelines, expanded market event coverage, and deeper regime classification. The foundation is solid. Now it scales.</p></div></div>
+    <div class="step"><div class="step-num">→</div><div class="step-content"><h4>Backtesting Integration</h4><p>Historical strategy validation against real market data. Proving agent strategies against past conditions before deploying them forward.</p></div></div>
+  </div>
+
+  <div class="wv-example">
+    <div class="wv-example-label">🏔 The Mountain State Advantage</div>
+    <p>This entire system was conceived, researched, designed, built, and deployed from West Virginia. No VC funding. No team of engineers. No office in Manhattan. One person with Claude AI, a clear plan, and the stubbornness to keep building when the API documentation lies to you. Montani Semper Liberi. The mountains don't care about your pedigree. They care about whether you keep climbing.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-label">Final Thought</div>
+    <h3>The real lesson of M0NTAN1 Financial</h3>
+    <p>This project is not about building a profitable trading bot. It might become that. But the real lesson is about systems thinking. About building architectures that survive contact with reality. About the difference between a plan and an operational system. About the 8 things that broke and the discipline to fix each one properly instead of hacking around them.</p>
+    <p>If you're a student in MØNTAN1 Academy, study this case not for the trading knowledge. Study it for the engineering patterns: separated concerns, data contracts, delta tracking, reconciliation as a first-class feature, and the humility to assume your assumptions are wrong until proven otherwise.</p>
+    <ul>
+      <li><strong>The metaphor IS the architecture.</strong> Pick a metaphor that maps to your problem domain and commit to it.</li>
+      <li><strong>Test constraints before building features.</strong> One day of API constraint testing saves a week of refactoring.</li>
+      <li><strong>Tag everything at write time.</strong> Context that isn't captured when data is created is context that's gone forever.</li>
+      <li><strong>Build reconciliation from Day 1.</strong> Any system talking to external services will drift. Plan for it.</li>
+      <li><strong>Disagreement is a feature.</strong> Systems that always agree with themselves are fragile. Build in tension.</li>
+    </ul>
+  </div>
+</div>
+
+</main>
+<script>
+// ── Progress tracking (shared with academy pages) ──
+const TOTAL_WEEKS = 12;
+const STORAGE_KEY = 'vibe-dev-completed';
+
+function getCompleted() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; }
+}
+
+function updateSidebarProgress() {
+  const c = getCompleted();
+  const pct = (c.length / TOTAL_WEEKS) * 100;
+  const fill = document.getElementById('sp-fill');
+  const label = document.getElementById('sp-label');
+  if (fill) fill.style.width = pct + '%';
+  if (label) label.textContent = c.length + ' / ' + TOTAL_WEEKS + ' complete';
+  document.querySelectorAll('.nav-week').forEach(el => {
+    const w = parseInt(el.dataset.week);
+    if (c.includes(w)) el.classList.add('done');
+    else el.classList.remove('done');
+  });
+}
+
+// Smooth scroll for section nav
+document.querySelectorAll('.section-nav-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateSidebarProgress();
+});
+updateSidebarProgress();
+</script>
+</body>
+</html>
